@@ -352,25 +352,3 @@ void deleteDevice(sql::Connection* con)
     }
 }
 
-void deleteItem(sql::Connection* con)
-{
-    int itemTypeChoice;
-    cout << "Choose the item type to delete:" << endl;
-    cout << "1. Physical Game" << endl;
-    cout << "2. Device" << endl;
-    cout << "Enter your choice (1 or 2): ";
-    cin >> itemTypeChoice;
-
-    switch (itemTypeChoice)
-    {
-    case 1:
-        deletePhysicalGame(con);
-        break;
-    case 2:
-        deleteDevice(con);
-        break;
-    default:
-        cout << "Invalid item type choice." << endl;
-        break;
-    }
-}

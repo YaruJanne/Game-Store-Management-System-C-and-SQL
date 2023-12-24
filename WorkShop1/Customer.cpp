@@ -1,4 +1,3 @@
-
 #include "Header.h"
 
 void processCustomer(sql::Connection* con, int choice)
@@ -25,7 +24,7 @@ void processCustomer(sql::Connection* con, int choice)
         case 3:
             int choice;  // Declare the choice variable here
 
-            cout << "\nWelcome to the Inventory Management System!" << endl;
+            cout << "\nWelcome to the Game Store!" << endl;
             cout << "1. Customer" << endl;
             cout << "2. Staff" << endl;
             cout << "Enter your choice (1 or 2): ";
