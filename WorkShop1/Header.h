@@ -1,4 +1,6 @@
 #pragma once
+#ifndef HEADER_H
+#define HEADER_H
 #include <stdlib.h>
 #include <iostream>
 #include <iomanip>
@@ -20,5 +22,7 @@ void editDevice(sql::Connection* con);
 void deletePhysicalGame(sql::Connection* con);
 void deleteDevice(sql::Connection* con);
 void processCustomer(sql::Connection* con, int choice); 
+void displayAvailableItemsWithCondition(sql::Connection* con, const string& condition);
 
 
+#endif

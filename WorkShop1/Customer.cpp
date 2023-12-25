@@ -1,17 +1,20 @@
+75
 #include "Header.h"
+
 
 void processCustomer(sql::Connection* con, int choice)
 {
-    int customerChoice;
+    int customerChoice = 0;  // Initialize the variable to avoid the error
 
     do
     {
-        std::cout << "\nCustomer Menu:" << std::endl;
-        std::cout << "1. Physical Game" << std::endl;
-        std::cout << "2. Device" << std::endl;
-        std::cout << "3. Back to Main Menu" << std::endl;
-        std::cout << "Enter your choice (1, 2, or 3): ";
-        std::cin >> customerChoice;
+        cout << "Customer Menu:" << endl;
+        cout << "1. Physical Game" << endl;
+        cout << "2. Device" << endl;
+        cout << "3. Search Items by Condition" << endl;
+        cout << "4. Exit to Main Menu" << endl;
+        cout << "Enter your choice (1, 2, 3, or 4): ";
+        cin >> customerChoice;
 
         switch (customerChoice)
         {
@@ -22,48 +25,36 @@ void processCustomer(sql::Connection* con, int choice)
             showDevices(con);
             break;
         case 3:
-            int choice;  // Declare the choice variable here
+            string condition;
+            cout << "Enter the condition to search for: ";
+            cin.ignore();
+            getline(cin, condition);
 
-            cout << "\nWelcome to the Game Store!" << endl;
-            cout << "1. Customer" << endl;
-            cout << "2. Staff" << endl;
-            cout << "Enter your choice (1 or 2): ";
-
-            cin >> choice;  // Initialize the choice variable
-
-            switch (choice)
-            {
-            case 1:
-                processCustomer(con, choice);  // Pass the choice variable to processCustomer
-                break;
-            case 2:
-                processStaff(con);
-                break;
-            default:
-                cout << "Invalid choice. Exiting." << endl;
-                break;
-            }
+            displayAvailableItemsWithCondition(con, condition);
+            break;
+            return;
+        case 4:
+            cout << "Exiting to Main Menu." << endl;
+            break;  // Return from the function to go back to the main menu
         default:
-            std::cout << "Invalid choice. Please enter 1, 2, or 3." << std::endl;
+            cout << "Invalid choice. Please enter 1, 2, 3, or 4." << endl;
             break;
         }
 
         // Check if the user pressed 'x' to return to the Customer menu
-        if (customerChoice != 3)
+        char returnToMenu;
+        cout << "Press 'x' to return to the Main Menu: ";
+        cin >> returnToMenu;
+
+        if (returnToMenu != 'x')
         {
-            char returnToMenu;
-            cout << "Press 'x' to return to the Customer menu: ";
-            cin >> returnToMenu;
-
-            if (returnToMenu != 'x')
-            {
-                cout << "Invalid input. Returning to the Customer menu." << endl;
-                processCustomer(con, choice);  // Pass the choice variable when calling recursively
-            }
+            cout << "Invalid input. Returning to the Customer menu." << endl;
         }
-    } while (customerChoice != 3);
+        else
+        {
+            cout << "Going back to Main Menu." << endl;
+            return;  // Return from the function to go back to the main menu
+        }
+    }while (customerChoice != 4);  // Repeat the loop until the user chooses to exit
 
-    // Additional customer functionality can be implemented here
-    // For example, making orders, viewing details of specific items, etc.
-    std::cout << "Customer functionality coming soon!" << std::endl;
 }
