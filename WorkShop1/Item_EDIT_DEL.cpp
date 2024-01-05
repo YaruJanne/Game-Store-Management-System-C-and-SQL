@@ -3,17 +3,17 @@ void editPhysicalGame(sql::Connection* con)
 {
     cout << "\nEditing a Physical Game:" << endl;
 
-    int listID;
-    cout << "\nEnter List ID of the Physical Game to edit: ";
-    cin >> listID;
+    int gameslistID;
+    cout << "\nEnter Physical ID of the Physical Game to edit: ";
+    cin >> gameslistID;
 
     try
     {
         con->setSchema("database");
 
         // Retrieve the details of the Physical Game based on List_ID
-        sql::PreparedStatement* pstmtSelect = con->prepareStatement("SELECT * FROM PhysicalGames WHERE List_ID = ?");
-        pstmtSelect->setInt(1, listID);
+        sql::PreparedStatement* pstmtSelect = con->prepareStatement("SELECT * FROM PhysicalGames WHERE Games_List_ID = ?");
+        pstmtSelect->setInt(1, gameslistID);
 
         sql::ResultSet* res = pstmtSelect->executeQuery();
 
@@ -22,7 +22,7 @@ void editPhysicalGame(sql::Connection* con)
         {
             // Display the current details
             cout << "\nCurrent details:" << endl;
-            cout << "List_ID: " << res->getInt("List_ID") << endl;
+            cout << "Games_List_ID: " << res->getInt("Games_List_ID") << endl;
             cout << "Item_Name: " << res->getString("Item_Name") << endl;
             cout << "Item_Quantity: " << res->getInt("Item_Quantity") << endl;
             cout << "Item_Condition: " << res->getString("Item_Condition") << endl;
@@ -56,14 +56,14 @@ void editPhysicalGame(sql::Connection* con)
             // Update the Physical Game in the database
             sql::PreparedStatement* pstmtUpdate = con->prepareStatement(
                 "UPDATE PhysicalGames SET Item_Name = ?, Item_Quantity = ?, Item_Condition = ?, "
-                "Item_Price = ?, Item_Date = ? WHERE List_ID = ?");
+                "Item_Price = ?, Item_Date = ? WHERE Games_List_ID= ?");
 
             pstmtUpdate->setString(1, itemName);
             pstmtUpdate->setInt(2, itemQuantity);
             pstmtUpdate->setString(3, itemCondition);
             pstmtUpdate->setDouble(4, itemPrice);
             pstmtUpdate->setString(5, itemDate);
-            pstmtUpdate->setInt(6, listID);
+            pstmtUpdate->setInt(6, gameslistID);
 
             pstmtUpdate->execute();
             delete pstmtUpdate;
@@ -72,7 +72,7 @@ void editPhysicalGame(sql::Connection* con)
         }
         else
         {
-            cout << "Physical Game with List_ID " << listID << " does not exist." << endl;
+            cout << "Physical Game with Devices_List_ID  " << gameslistID << " does not exist." << endl;
         }
 
         delete res;
@@ -88,17 +88,17 @@ void editDevice(sql::Connection* con)
 {
     cout << "\nEditing a Device:" << endl;
 
-    int listID;
-    cout << "Enter List ID of the Device to edit: ";
-    cin >> listID;
+    int deviceslistID;
+    cout << "Enter Device ID of the Device to edit: ";
+    cin >> deviceslistID;
 
     try
     {
         con->setSchema("database");
 
         // Retrieve the details of the Device based on List_ID
-        sql::PreparedStatement* pstmtSelect = con->prepareStatement("SELECT * FROM Devices WHERE List_ID = ?");
-        pstmtSelect->setInt(1, listID);
+        sql::PreparedStatement* pstmtSelect = con->prepareStatement("SELECT * FROM Devices WHERE Devices_List_ID = ?");
+        pstmtSelect->setInt(1, deviceslistID);
 
         sql::ResultSet* res = pstmtSelect->executeQuery();
 
@@ -107,7 +107,7 @@ void editDevice(sql::Connection* con)
         {
             // Display the current details
             cout << "\nCurrent details:" << endl;
-            cout << "List_ID: " << res->getInt("List_ID") << endl;
+            cout << "Devices_List_ID: " << res->getInt("Devices_List_ID") << endl;
             cout << "Item_Name: " << res->getString("Item_Name") << endl;
             cout << "Item_Quantity: " << res->getInt("Item_Quantity") << endl;
             cout << "Item_Condition: " << res->getString("Item_Condition") << endl;
@@ -141,14 +141,14 @@ void editDevice(sql::Connection* con)
             // Update the Device in the database
             sql::PreparedStatement* pstmtUpdate = con->prepareStatement(
                 "UPDATE Devices SET Item_Name = ?, Item_Quantity = ?, Item_Condition = ?, "
-                "Item_Price = ?, Item_Date = ? WHERE List_ID = ?");
+                "Item_Price = ?, Item_Date = ? WHERE Devices_List_ID = ?");
 
             pstmtUpdate->setString(1, itemName);
             pstmtUpdate->setInt(2, itemQuantity);
             pstmtUpdate->setString(3, itemCondition);
             pstmtUpdate->setDouble(4, itemPrice);
             pstmtUpdate->setString(5, itemDate);
-            pstmtUpdate->setInt(6, listID);
+            pstmtUpdate->setInt(6, deviceslistID);
 
             pstmtUpdate->execute();
             delete pstmtUpdate;
@@ -157,7 +157,7 @@ void editDevice(sql::Connection* con)
         }
         else
         {
-            cout << "Device with List_ID " << listID << " does not exist." << endl;
+            cout << "Device with Devices_List_ID " << deviceslistID << " does not exist." << endl;
         }
 
         delete res;
@@ -199,9 +199,9 @@ void deletePhysicalGame(sql::Connection* con)
     // Display the current Physical Games
     showPhysicalGames(con);
 
-    int listID;
+    int gameslistID;
     cout << "Enter List ID of the Physical Game to delete (or 'x' to cancel): ";
-    cin >> listID;
+    cin >> gameslistID;
 
     if (cin.fail())
     {
@@ -212,7 +212,7 @@ void deletePhysicalGame(sql::Connection* con)
         return;
     }
 
-    if (listID == 'x')
+    if (gameslistID == 'x')
     {
         cout << "Returning to the staff menu." << endl;
         return;
@@ -223,8 +223,8 @@ void deletePhysicalGame(sql::Connection* con)
         con->setSchema("database");
 
         // Check if the Physical Game with the provided List_ID exists
-        sql::PreparedStatement* pstmtSelect = con->prepareStatement("SELECT * FROM PhysicalGames WHERE List_ID = ?");
-        pstmtSelect->setInt(1, listID);
+        sql::PreparedStatement* pstmtSelect = con->prepareStatement("SELECT * FROM PhysicalGames WHERE Games_List_ID = ?");
+        pstmtSelect->setInt(1, gameslistID);
 
         sql::ResultSet* res = pstmtSelect->executeQuery();
 
@@ -232,7 +232,7 @@ void deletePhysicalGame(sql::Connection* con)
         {
             // Physical Game found, confirm deletion
             cout << "\nAre you sure you want to delete the following Physical Game?" << endl;
-            cout << "List_ID: " << res->getInt("List_ID") << endl;
+            cout << "Games_List_ID: " << res->getInt("Games_List_ID") << endl;
             cout << "Item_Name: " << res->getString("Item_Name") << endl;
             cout << "Item_Quantity: " << res->getInt("Item_Quantity") << endl;
             cout << "Item_Condition: " << res->getString("Item_Condition") << endl;
@@ -246,8 +246,8 @@ void deletePhysicalGame(sql::Connection* con)
             if (confirmDelete == 'y' || confirmDelete == 'Y')
             {
                 // Delete the Physical Game from the database
-                sql::PreparedStatement* pstmtDelete = con->prepareStatement("DELETE FROM PhysicalGames WHERE List_ID = ?");
-                pstmtDelete->setInt(1, listID);
+                sql::PreparedStatement* pstmtDelete = con->prepareStatement("DELETE FROM PhysicalGames WHERE Games_List_ID = ?");
+                pstmtDelete->setInt(1, gameslistID);
                 pstmtDelete->execute();
                 delete pstmtDelete;
 
@@ -260,7 +260,7 @@ void deletePhysicalGame(sql::Connection* con)
         }
         else
         {
-            cout << "Physical Game with List_ID " << listID << " does not exist." << endl;
+            cout << "Physical Game with Games_List_ID " << gameslistID << " does not exist." << endl;
         }
 
         delete res;
@@ -279,9 +279,9 @@ void deleteDevice(sql::Connection* con)
     // Display the current Devices
     showDevices(con);
 
-    int listID;
+    int deviceslistID;
     cout << "Enter List ID of the Device to delete (or 'x' to cancel): ";
-    cin >> listID;
+    cin >> deviceslistID;
 
     if (cin.fail())
     {
@@ -292,7 +292,7 @@ void deleteDevice(sql::Connection* con)
         return;
     }
 
-    if (listID == 'x')
+    if (deviceslistID == 'x')
     {
         cout << "Returning to the staff menu." << endl;
         return;
@@ -303,8 +303,8 @@ void deleteDevice(sql::Connection* con)
         con->setSchema("database");
 
         // Check if the Device with the provided List_ID exists
-        sql::PreparedStatement* pstmtSelect = con->prepareStatement("SELECT * FROM Devices WHERE List_ID = ?");
-        pstmtSelect->setInt(1, listID);
+        sql::PreparedStatement* pstmtSelect = con->prepareStatement("SELECT * FROM Devices WHERE Devices_List_ID = ?");
+        pstmtSelect->setInt(1, deviceslistID);
 
         sql::ResultSet* res = pstmtSelect->executeQuery();
 
@@ -312,7 +312,7 @@ void deleteDevice(sql::Connection* con)
         {
             // Device found, confirm deletion
             cout << "\nAre you sure you want to delete the following Device?" << endl;
-            cout << "List_ID: " << res->getInt("List_ID") << endl;
+            cout << "Devices_List_ID : " << res->getInt("Devices_List_ID ") << endl;
             cout << "Item_Name: " << res->getString("Item_Name") << endl;
             cout << "Item_Quantity: " << res->getInt("Item_Quantity") << endl;
             cout << "Item_Condition: " << res->getString("Item_Condition") << endl;
@@ -326,8 +326,8 @@ void deleteDevice(sql::Connection* con)
             if (confirmDelete == 'y' || confirmDelete == 'Y')
             {
                 // Delete the Device from the database
-                sql::PreparedStatement* pstmtDelete = con->prepareStatement("DELETE FROM Devices WHERE List_ID = ?");
-                pstmtDelete->setInt(1, listID);
+                sql::PreparedStatement* pstmtDelete = con->prepareStatement("DELETE FROM Devices WHERE Devices_List_ID = ?");
+                pstmtDelete->setInt(1, deviceslistID);
                 pstmtDelete->execute();
                 delete pstmtDelete;
 
@@ -340,7 +340,7 @@ void deleteDevice(sql::Connection* con)
         }
         else
         {
-            cout << "Device with List_ID " << listID << " does not exist." << endl;
+            cout << "Device with Devices_List_ID " << deviceslistID << " does not exist." << endl;
         }
 
         delete res;

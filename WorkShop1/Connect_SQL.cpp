@@ -35,7 +35,7 @@ int main()
     switch (choice)
     {
     case 1:
-        processCustomer(con, choice);  // Pass the choice variable to processCustomer
+        processCustomer(con);
         break;
     case 2:
         processStaff(con);

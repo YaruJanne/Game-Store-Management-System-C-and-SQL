@@ -7,13 +7,13 @@ void addNewPhysicalGame(sql::Connection* con)
     cout << "\nAdding a new Physical Game:" << endl;
 
     // Get user input for each attribute
-    int listID;
+    int gameslistID;
     string itemName, itemCondition, itemDate;
     int itemQuantity;
     double itemPrice;
 
-    cout << "\nList ID: ";
-    cin >> listID;
+    cout << "\nPhysical Game ID: ";
+    cin >> gameslistID;
 
     cout << "Item Name: ";
     cin.ignore(); // Ignore any previous newline character in the buffer
@@ -39,10 +39,10 @@ void addNewPhysicalGame(sql::Connection* con)
 
         // Insert the new Physical Game into the database
         sql::PreparedStatement* pstmt = con->prepareStatement(
-            "INSERT INTO PhysicalGames (List_ID, Item_Name, Item_Quantity, Item_Condition, Item_Price, Item_Date) "
+            "INSERT INTO PhysicalGames (Games_list_ID, Item_Name, Item_Quantity, Item_Condition, Item_Price, Item_Date) "
             "VALUES (?, ?, ?, ?, ?, ?)");
 
-        pstmt->setInt(1, listID);
+        pstmt->setInt(1, gameslistID);
         pstmt->setString(2, itemName);
         pstmt->setInt(3, itemQuantity);
         pstmt->setString(4, itemCondition);
@@ -65,13 +65,13 @@ void addNewDevice(sql::Connection* con)
     cout << "\nAdding a new Device:" << endl;
 
     // Get user input for each attribute
-    int listID;
+    int deviceslistID;
     string itemName, itemCondition, itemDate;
     int itemQuantity;
     double itemPrice;
 
-    cout << "\nList ID: ";
-    cin >> listID;
+    cout << "\n Device ID: ";
+    cin >> deviceslistID;
 
     cout << "Item Name: ";
     cin.ignore(); // Ignore any previous newline character in the buffer
@@ -97,10 +97,10 @@ void addNewDevice(sql::Connection* con)
 
         // Insert the new Device into the database
         sql::PreparedStatement* pstmt = con->prepareStatement(
-            "INSERT INTO Devices (List_ID, Item_Name, Item_Quantity, Item_Condition, Item_Price, Item_Date) "
+            "INSERT INTO Devices (Devices_list_ID, Item_Name, Item_Quantity, Item_Condition, Item_Price, Item_Date) "
             "VALUES (?, ?, ?, ?, ?, ?)");
 
-        pstmt->setInt(1, listID);
+        pstmt->setInt(1, deviceslistID);
         pstmt->setString(2, itemName);
         pstmt->setInt(3, itemQuantity);
         pstmt->setString(4, itemCondition);
@@ -128,12 +128,12 @@ void showPhysicalGames(sql::Connection* con)
         sql::ResultSet* res = stmt->executeQuery("SELECT * FROM PhysicalGames");
 
         cout << "Physical Games:" << endl;
-        cout << left << setw(8) << "List_ID" << setw(20) << "Item_Name" << setw(15) << "Item_Quantity"
+        cout << left << setw(8) << "Games_List_ID" << setw(20) << "Item_Name" << setw(15) << "Item_Quantity"
             << setw(15) << "Item_Condition" << setw(15) << "Item_Price" << setw(15) << "Item_Date" << endl;
 
         while (res->next())
         {
-            cout << left << setw(8) << res->getInt("List_ID") << setw(20) << res->getString("Item_Name")
+            cout << left << setw(8) << res->getInt("Games_List_ID") << setw(20) << res->getString("Item_Name")
                 << setw(15) << res->getInt("Item_Quantity") << setw(15) << res->getString("Item_Condition")
                 << setw(15) << res->getDouble("Item_Price") << setw(15) << res->getString("Item_Date") << endl;
         }
@@ -157,12 +157,12 @@ void showDevices(sql::Connection* con)
         sql::ResultSet* res = stmt->executeQuery("SELECT * FROM Devices");
 
         cout << "Devices:" << endl;
-        cout << left << setw(8) << "List_ID" << setw(20) << "Item_Name" << setw(15) << "Item_Quantity"
+        cout << left << setw(8) << "Devices_list_ID" << setw(20) << "Item_Name" << setw(15) << "Item_Quantity"
             << setw(15) << "Item_Condition" << setw(15) << "Item_Price" << setw(15) << "Item_Date" << endl;
 
         while (res->next())
         {
-            cout << left << setw(8) << res->getInt("List_ID") << setw(20) << res->getString("Item_Name")
+            cout << left << setw(8) << res->getInt("Devices_List_ID") << setw(20) << res->getString("Item_Name")
                 << setw(15) << res->getInt("Item_Quantity") << setw(15) << res->getString("Item_Condition")
                 << setw(15) << res->getDouble("Item_Price") << setw(15) << res->getString("Item_Date") << endl;
         }

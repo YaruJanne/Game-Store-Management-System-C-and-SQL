@@ -18,19 +18,22 @@
     <ClCompile Include="Connect_SQL.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Staff_ADD_SHOW.cpp">
+    <ClCompile Include="Item_ADD_SHOW.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Staff_EDIT_DEL.cpp">
+    <ClCompile Include="Item_EDIT_DEL.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Staff_Menu.cpp">
+    <ClCompile Include="Staff_Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Customer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Join_Genre.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Staff_Menu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,34 +1,66 @@
+// Join_Genre.cpp
+
 #include "Header.h"
+/*
+void searchItemsByCondition(sql::Connection* con) {
+    int searchChoice;
+    string condition;
+    bool includeCondition;
 
-void displayAvailableItemsWithCondition(sql::Connection* con, const string& condition)
-{
-    try
-    {
-        con->setSchema("database");
+    do {
+        cout << "\nSearch Items by Condition:\n";
+        cout << "1. Search by ID\n";
+        cout << "2. Search by Name\n";
+        cout << "3. Search by Condition\n";
+        cout << "4. Search by Price\n";
+        cout << "5. Back to Customer Menu\n";
+        cout << "Enter your choice (1-5): ";
+        cin >> searchChoice;
 
-        // Perform a join between PhysicalGames and Devices based on Item_Condition
-        string query = "SELECT * FROM PhysicalGames INNER JOIN Devices ON PhysicalGames.Item_Condition = Devices.Item_Condition WHERE PhysicalGames.Item_Condition = ?";
-
-        sql::PreparedStatement* pstmt = con->prepareStatement(query);
-        pstmt->setString(1, condition);
-
-        sql::ResultSet* res = pstmt->executeQuery();
-
-        cout << "Items with Condition '" << condition << "':" << endl;
-        cout << "List_ID\tItem_Name\tItem_Quantity\tItem_Condition\tItem_Price\tItem_Date" << endl;
-
-        while (res->next())
-        {
-            cout << res->getInt("List_ID") << "\t" << res->getString("Item_Name") << "\t"
-                << res->getInt("Item_Quantity") << "\t" << res->getString("Item_Condition") << "\t"
-                << res->getDouble("Item_Price") << "\t" << res->getString("Item_Date") << endl;
+        switch (searchChoice) {
+        case 1:
+            condition = "List_ID";
+            break;
+        case 2:
+            condition = "Item_Name";
+            break;
+        case 3:
+            condition = "Item_Condition";
+            break;
+        case 4:
+            condition = "Item_Price";
+            break;
+        case 5:
+            cout << "Returning to Customer Menu.\n";
+            return;
+        default:
+            cout << "Invalid choice. Please enter a number between 1 and 5.\n";
+            continue;
         }
 
-        delete res;
-        delete pstmt;
-    }
-    catch (sql::SQLException e)
-    {
-        cout << "Error fetching items with condition. Error message: " << e.what() << endl;
-    }
+        char includeChoice;
+        cout << "Include this condition? (Y/N): ";
+        cin >> includeChoice;
+
+        includeCondition = (includeChoice == 'Y' || includeChoice == 'y');
+
+        if (includeCondition) {
+            cout << "Enter the detail for " << condition << ": ";
+            cin.ignore();
+            getline(cin, condition);
+        }
+
+  void displayAvailableItemsWithCondition(con, condition, includeCondition);
+
+        char retryChoice;
+        cout << "\nDo you want to search again? (Y/N): ";
+        cin >> retryChoice;
+
+        if (retryChoice != 'Y' && retryChoice != 'y') {
+            cout << "Returning to Customer Menu.\n";
+            return;
+        }
+
+    } while (true);
 }
+*/
