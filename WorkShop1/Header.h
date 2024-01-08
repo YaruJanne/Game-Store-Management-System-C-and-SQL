@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <iostream>
 #include <iomanip>
+#include <vector>
 
 #include "mysql_connection.h"
 #include <cppconn/driver.h>
@@ -20,6 +21,7 @@ using namespace std;
 void itemMenu(sql::Connection* con);
 void processStaff(sql::Connection* con);
 void processCustomer(sql::Connection* con); 
+void enterCustomer(sql::Connection* con);
 
 void addNewPhysicalGame(sql::Connection* con);
 void addNewDevice(sql::Connection* con);
@@ -29,17 +31,22 @@ void editPhysicalGame(sql::Connection* con);
 void editDevice(sql::Connection* con);
 void deletePhysicalGame(sql::Connection* con);
 void deleteDevice(sql::Connection* con);
-//void displayAvailableItemsWithCondition(sql::Connection* con, const string& condition, bool includeCondition);
+void displayAvailableItemsWithCondition(sql::Connection* con, const string& condition, bool includeCondition);
 void registerCustomer(sql::Connection* con);
-bool loginCustomer(sql::Connection* con, int& customerID);
-//int getNextCustomerId(sql::Connection* con);
+bool loginCustomer(sql::Connection* con, int& customerId, string& customerEmail, string& customerPassword);
 
 void staffMain(sql::Connection* con);
 void staffMenu(sql::Connection* con);
+
+//purchase 
+void orderMenu(sql::Connection* con);  
 
 void addStaffRecord(sql::Connection* con);
 void editStaffDetails(sql::Connection* con);
 void deleteStaffRecord(sql::Connection* con);
 void showStaffRecord(sql::Connection* con);
+
+
+
 
 #endif

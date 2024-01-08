@@ -2,6 +2,9 @@
 
 #include "Header.h"
 
+void orderMenu(sql::Connection* con, const std::string& customerEmail);  // Declaration
+
+
 bool loginCustomer(sql::Connection* con, int& customerId)
 {
     cout << "\nCustomer Login:" << endl;
@@ -31,7 +34,7 @@ bool loginCustomer(sql::Connection* con, int& customerId)
         if (res->next())
         {
             cout << " Login Success." << endl;
-            processCustomer(con);
+            enterCustomer(con);
             delete pstmt;
            
         }
@@ -130,6 +133,7 @@ void processCustomer(sql::Connection* con)
         case 3:
             // Returning to the main menu
             cout << "Returning to the Main Menu." << endl;
+            return;  // Use return to exit the function and go back to int main
             break;
         default:
             cout << "Invalid choice. Please enter a number between 1 and 3." << endl;
@@ -137,5 +141,55 @@ void processCustomer(sql::Connection* con)
         }
 
     } while (customerOption != 3);
+}
+
+void enterCustomer(sql::Connection* con)
+{
+    int customerChoice;  // Declare the variable outside the loop
+
+    do
+    {
+        cout << "Customer Menu:" << endl;
+        cout << "1. Physical Game" << endl;
+        cout << "2. Device" << endl;
+        cout << "3. Order" << endl;
+        cout << "4. Exit to Main Menu" << endl;
+        cout << "Enter your choice (1, 2, 3, or 4): ";
+        cin >> customerChoice;
+
+        switch (customerChoice)
+        {
+        case 1:
+            showPhysicalGames(con);
+            break;
+        case 2:
+            showDevices(con);
+            break;
+        case 3:
+            orderMenu(con);
+            break;
+        case 4:
+            cout << "Exiting to Main Menu." << endl;
+            return;
+            break;
+        default:
+            cout << "Invalid choice. Please enter 1, 2, 3, or 4." << endl;
+            break;
+        }
+
+        // Check if the user pressed 'x' to return to the Customer menu
+        char returnToMenu;
+        cout << "Press 'x' to return to the Main Menu: ";
+        cin >> returnToMenu;
+
+        if (returnToMenu != 'x')
+        {
+            cout << "Invalid input. Returning to the Customer menu." << endl;
+        }
+        else
+        {
+            cout << "Going back to Main Menu." << endl;
+        }
+    } while (customerChoice != 4);  // Repeat the loop until the user chooses to exit
 }
 

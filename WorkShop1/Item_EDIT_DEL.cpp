@@ -352,3 +352,7 @@ void deleteDevice(sql::Connection* con)
     }
 }
 
+void displayAvailableItemsWithCondition(sql::Connection* con, const string& condition, bool includeCondition)
+{
+}
+

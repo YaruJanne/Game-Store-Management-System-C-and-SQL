@@ -133,7 +133,7 @@
   <ItemGroup>
     <ClCompile Include="Connect_SQL.cpp" />
     <ClCompile Include="Customer.cpp" />
-    <ClCompile Include="Join_Genre.cpp" />
+    <ClCompile Include="Order.cpp" />
     <ClCompile Include="Staff_Menu.cpp" />
     <ClCompile Include="Staff_Main.cpp" />
     <ClCompile Include="Item_EDIT_DEL.cpp" />

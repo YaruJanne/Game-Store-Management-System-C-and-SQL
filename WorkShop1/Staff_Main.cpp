@@ -63,55 +63,16 @@ void staffMain(sql::Connection* con)
             // Existing code for customer functionality
             break;
         case 6:
-            int choice;  // Declare the choice variable here
-
-            cout << "\nWelcome to the Game Store!" << endl;
-            cout << "1. Customer" << endl;
-            cout << "2. Staff" << endl;
-            cout << "3. Exit" << endl;
-            cout << "Enter your choice (1, 2, or 3): ";
-
-            cin >> choice;  // Initialize the choice variable
-
-            switch (choice)
-            {
-            case 1:
-                return;
-                break;
-            case 2:
-                processStaff(con);
-                break;
-            case 3:
-                cout << "Exiting Main Menu. Returning to Main Menu." << endl;
-                return;  // Exit the staffMenu function, returning to the main menu
-            default:
-                cout << "Invalid choice. Exiting." << endl;
-                break;
-            }
-            break;  // Exit the staffMenu function, returning to the main menu
+            // Returning to the main menu
+            cout << "Returning to the Main Menu." << endl;
+            return;  // Use return to exit the function and go back to int main
+            break;
         default:
-            cout << "Invalid choice. Please enter a number between 1 and 6." << endl;
+            cout << "Invalid choice. Please enter a number between 1 and 3." << endl;
             break;
         }
 
-        // Check if the user pressed 'x' to return to the main menu
-        if (staffChoice != 6)
-        {
-            char returnToMenu;
-            cout << "Press 'x' to return to the Main Menu, or any other key to return to the Main Menu: ";
-            cin >> returnToMenu;
-
-            if (returnToMenu != 'x')
-            {
-                cout << "Returning to the Main Menu." << endl;
-                break;  // Exit the loop and return to the main menu
-            }
-        }
-    } while (true);
-
-    // Additional item functionality can be implemented here
-    // For example, handling item details, managing item stock, etc.
-    cout << "Item functionality coming soon!" << endl;
+    } while (staffChoice != 6);
 }
 
 

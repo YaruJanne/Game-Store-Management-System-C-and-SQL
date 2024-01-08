@@ -23,27 +23,35 @@ int main()
         exit(1);
     }
 
-    int choice;  // Declare the choice variable here
+    int choice;
 
-    cout << "\nWelcome to the Game Store!" << endl;
-    cout << "1. Customer" << endl;
-    cout << "2. Staff" << endl;
-    cout << "Enter your choice (1 or 2): ";
-
-    cin >> choice;  // Initialize the choice variable
-
-    switch (choice)
+    do
     {
-    case 1:
-        processCustomer(con);
-        break;
-    case 2:
-        processStaff(con);
-        break;
-    default:
-        cout << "Invalid choice. Exiting." << endl;
-        break;
-    }
+        cout << "\nWelcome to the Game Store!" << endl;
+        cout << "1. Customer" << endl;
+        cout << "2. Staff" << endl;
+        cout << "3. Exit" << endl;
+        cout << "Enter your choice (1, 2, or 3): ";
+
+        cin >> choice;
+
+        switch (choice)
+        {
+        case 1:
+            processCustomer(con);
+            break;
+        case 2:
+            processStaff(con);
+            break;
+        case 3:
+            cout << "Exiting Main Menu. Goodbye!" << endl;
+            break;
+        default:
+            cout << "Invalid choice. Please enter a number between 1 and 3." << endl;
+            break;
+        }
+
+    } while (choice != 3);
 
     delete con;
     system("pause");
