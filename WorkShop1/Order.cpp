@@ -2,7 +2,9 @@
 
 #include "Header.h"
 
-void orderMenu(sql::Connection* con);  
+
+
+void orderMenu(sql::Connection* con);
 
 void orderMenu(sql::Connection* con)
 {
@@ -54,3 +56,89 @@ void orderMenu(sql::Connection* con)
 }
 
 // Implement the orderNewItems and showOrder functions as needed
+
+void orderNewItems(sql::Connection* con, const string& customerEmail)
+{
+    try
+    {
+        con->setSchema("database");  // Replace 'your_database_name' with your actual database name
+
+        // Prompt the user for order details
+        int gamesListID, devicesListID, purQuantity;
+        string purName;
+
+        cout << "Enter Games_List_ID: ";
+        cin >> gamesListID;
+
+        cout << "Enter Devices_List_ID: ";
+        cin >> devicesListID;
+
+        cout << "Enter Pur_Name: ";
+        cin.ignore();
+        getline(cin, purName);
+
+        cout << "Enter Pur_Quantity: ";
+        cin >> purQuantity;
+
+        // Perform the necessary SQL queries and updates here to add the new order to the purchase record
+        // Calculate Pur_Price by joining item prices from the physical games and devices tables
+        // and multiplying with Pur_Quantity.
+
+        // Example SQL query (you'll need to adapt this based on your actual database schema):
+        string sqlQuery = "INSERT INTO purchase_record (Cus_Email, Games_List_ID, Devices_List_ID, Pur_Name, Pur_Quantity, Pur_Price, Pur_Date) "
+            "VALUES (?, ?, ?, ?, ?, (SELECT (Price * ?) FROM physical_games WHERE Games_List_ID = ?), CURRENT_DATE)";
+
+        sql::PreparedStatement* pstmt = con->prepareStatement(sqlQuery);
+        pstmt->setString(1, customerEmail);
+        pstmt->setInt(2, gamesListID);
+        pstmt->setInt(3, devicesListID);
+        pstmt->setString(4, purName);
+        pstmt->setInt(5, purQuantity);
+        pstmt->setInt(6, purQuantity);  // Pur_Price calculated by multiplying with Pur_Quantity
+        pstmt->setInt(7, gamesListID);  // Games_List_ID for joining with physical_games table
+
+        pstmt->executeUpdate();
+        delete pstmt;
+
+        cout << "Order placed successfully!" << endl;
+    }
+    catch (sql::SQLException e)
+    {
+        cout << "Error placing order. Error message: " << e.what() << endl;
+    }
+}
+
+void showOrder(sql::Connection* con, const string& customerEmail)
+{
+    // Implement logic to connect to the database and show the customer's existing orders
+    // Retrieve and display relevant information from the purchase record.
+
+    // Example (you'll need to modify and expand this based on your actual database schema):
+    try
+    {
+        con->setSchema("database");  // Replace 'your_database_name' with your actual database name
+
+        // Perform the necessary SQL queries and retrieve purchase records for the customer
+        // Example SQL query (you'll need to adapt this based on your actual database schema):
+        string sqlQuery = "SELECT * FROM purchase_record WHERE Cus_Email = ?";
+
+        sql::PreparedStatement* pstmt = con->prepareStatement(sqlQuery);
+        pstmt->setString(1, customerEmail);
+
+        sql::ResultSet* res = pstmt->executeQuery();
+
+        // Display the retrieved purchase records
+        while (res->next())
+        {
+            cout << "Purchase ID: " << res->getInt("Purchase_ID") << endl;
+            // Display other relevant information from the purchase record
+        }
+
+        delete res;
+        delete pstmt;
+    }
+    catch (sql::SQLException e)
+    {
+        cout << "Error showing orders. Error message: " << e.what() << endl;
+    }
+}

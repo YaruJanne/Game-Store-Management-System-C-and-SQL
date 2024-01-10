@@ -2,7 +2,7 @@
 
 #include "Header.h"
 
-void orderMenu(sql::Connection* con, const std::string& customerEmail);  // Declaration
+
 
 
 bool loginCustomer(sql::Connection* con, int& customerId)
@@ -36,7 +36,7 @@ bool loginCustomer(sql::Connection* con, int& customerId)
             cout << " Login Success." << endl;
             enterCustomer(con);
             delete pstmt;
-           
+
         }
         else
         {
@@ -84,7 +84,7 @@ void registerCustomer(sql::Connection* con)
         sql::PreparedStatement* pstmt = con->prepareStatement(
             "INSERT INTO customer (Cus_Name, Cus_Telno, Cus_Email, Cus_password) VALUES ( ?, ?, ?, ?)");
 
-  
+
         pstmt->setString(1, name);
         pstmt->setString(2, telno);
         pstmt->setString(3, email);
@@ -192,4 +192,3 @@ void enterCustomer(sql::Connection* con)
         }
     } while (customerChoice != 4);  // Repeat the loop until the user chooses to exit
 }
-

@@ -11,13 +11,13 @@ void editPhysicalGame(sql::Connection* con)
     {
         con->setSchema("database");
 
-        // Retrieve the details of the Physical Game based on List_ID
+        // Retrieve the details of the Physical Game based on Games_List_ID
         sql::PreparedStatement* pstmtSelect = con->prepareStatement("SELECT * FROM PhysicalGames WHERE Games_List_ID = ?");
         pstmtSelect->setInt(1, gameslistID);
 
         sql::ResultSet* res = pstmtSelect->executeQuery();
 
-        // Check if the Physical Game with the provided List_ID exists
+        // Check if the Physical Game with the provided Games_List_ID exists
         if (res->next())
         {
             // Display the current details
@@ -29,50 +29,53 @@ void editPhysicalGame(sql::Connection* con)
             cout << "Item_Price: " << res->getDouble("Item_Price") << endl;
             cout << "Item_Date: " << res->getString("Item_Date") << endl;
 
-            // Get updated values from the staff
-            string itemName, itemCondition, itemDate;
-            int itemQuantity;
-            double itemPrice;
+            // Prompt for attribute to edit
+            cout << "\nEnter attribute to edit (1. Name, 2. Quantity, 3. Condition, 4. Price, 5. Date): ";
+            int attributeChoice;
+            cin >> attributeChoice;
 
-            cout << "\nEnter updated details:" << endl;
-            cout << "Item Name: ";
+            // Get updated value from the staff based on the chosen attribute
+            string updatedValue;
+            cout << "Enter updated value: ";
             cin.ignore(); // Ignore any previous newline character in the buffer
-            getline(cin, itemName);
+            getline(cin, updatedValue);
 
-            cout << "Item Quantity: ";
-            cin >> itemQuantity;
+            // Update the Physical Game in the database based on the chosen attribute
+            sql::PreparedStatement* pstmtUpdate = nullptr;
 
-            cout << "Item Condition: ";
-            cin.ignore();
-            getline(cin, itemCondition);
+            switch (attributeChoice)
+            {
+            case 1:
+                pstmtUpdate = con->prepareStatement("UPDATE PhysicalGames SET Item_Name = ? WHERE Games_List_ID = ?");
+                break;
+            case 2:
+                pstmtUpdate = con->prepareStatement("UPDATE PhysicalGames SET Item_Quantity = ? WHERE Games_List_ID = ?");
+                break;
+            case 3:
+                pstmtUpdate = con->prepareStatement("UPDATE PhysicalGames SET Item_Condition = ? WHERE Games_List_ID = ?");
+                break;
+            case 4:
+                pstmtUpdate = con->prepareStatement("UPDATE PhysicalGames SET Item_Price = ? WHERE Games_List_ID = ?");
+                break;
+            case 5:
+                pstmtUpdate = con->prepareStatement("UPDATE PhysicalGames SET Item_Date = ? WHERE Games_List_ID = ?");
+                break;
+            default:
+                cout << "Invalid attribute choice." << endl;
+                return;
+            }
 
-            cout << "Item Price: ";
-            cin >> itemPrice;
-
-            cout << "Item Date (YYYY-MM-DD): ";
-            cin.ignore();
-            getline(cin, itemDate);
-
-            // Update the Physical Game in the database
-            sql::PreparedStatement* pstmtUpdate = con->prepareStatement(
-                "UPDATE PhysicalGames SET Item_Name = ?, Item_Quantity = ?, Item_Condition = ?, "
-                "Item_Price = ?, Item_Date = ? WHERE Games_List_ID= ?");
-
-            pstmtUpdate->setString(1, itemName);
-            pstmtUpdate->setInt(2, itemQuantity);
-            pstmtUpdate->setString(3, itemCondition);
-            pstmtUpdate->setDouble(4, itemPrice);
-            pstmtUpdate->setString(5, itemDate);
-            pstmtUpdate->setInt(6, gameslistID);
+            pstmtUpdate->setString(1, updatedValue);
+            pstmtUpdate->setInt(2, gameslistID);
 
             pstmtUpdate->execute();
             delete pstmtUpdate;
 
-            cout << "Physical Game updated successfully!" << endl;
+            cout << "Physical Game attribute updated successfully!" << endl;
         }
         else
         {
-            cout << "Physical Game with Devices_List_ID  " << gameslistID << " does not exist." << endl;
+            cout << "Physical Game with Games_List_ID " << gameslistID << " does not exist." << endl;
         }
 
         delete res;
@@ -96,13 +99,13 @@ void editDevice(sql::Connection* con)
     {
         con->setSchema("database");
 
-        // Retrieve the details of the Device based on List_ID
+        // Retrieve the details of the Device based on Devices_List_ID
         sql::PreparedStatement* pstmtSelect = con->prepareStatement("SELECT * FROM Devices WHERE Devices_List_ID = ?");
         pstmtSelect->setInt(1, deviceslistID);
 
         sql::ResultSet* res = pstmtSelect->executeQuery();
 
-        // Check if the Device with the provided List_ID exists
+        // Check if the Device with the provided Devices_List_ID exists
         if (res->next())
         {
             // Display the current details
@@ -114,46 +117,49 @@ void editDevice(sql::Connection* con)
             cout << "Item_Price: " << res->getDouble("Item_Price") << endl;
             cout << "Item_Date: " << res->getString("Item_Date") << endl;
 
-            // Get updated values from the staff
-            string itemName, itemCondition, itemDate;
-            int itemQuantity;
-            double itemPrice;
+            // Prompt for attribute to edit
+            cout << "\nEnter attribute to edit (1. Name, 2. Quantity, 3. Condition, 4. Price, 5. Date): ";
+            int attributeChoice;
+            cin >> attributeChoice;
 
-            cout << "\nEnter updated details:" << endl;
-            cout << "Item Name: ";
+            // Get updated value from the staff based on the chosen attribute
+            string updatedValue;
+            cout << "Enter updated value: ";
             cin.ignore(); // Ignore any previous newline character in the buffer
-            getline(cin, itemName);
+            getline(cin, updatedValue);
 
-            cout << "Item Quantity: ";
-            cin >> itemQuantity;
+            // Update the Device in the database based on the chosen attribute
+            sql::PreparedStatement* pstmtUpdate = nullptr;
 
-            cout << "Item Condition: ";
-            cin.ignore();
-            getline(cin, itemCondition);
+            switch (attributeChoice)
+            {
+            case 1:
+                pstmtUpdate = con->prepareStatement("UPDATE Devices SET Item_Name = ? WHERE Devices_List_ID = ?");
+                break;
+            case 2:
+                pstmtUpdate = con->prepareStatement("UPDATE Devices SET Item_Quantity = ? WHERE Devices_List_ID = ?");
+                break;
+            case 3:
+                pstmtUpdate = con->prepareStatement("UPDATE Devices SET Item_Condition = ? WHERE Devices_List_ID = ?");
+                break;
+            case 4:
+                pstmtUpdate = con->prepareStatement("UPDATE Devices SET Item_Price = ? WHERE Devices_List_ID = ?");
+                break;
+            case 5:
+                pstmtUpdate = con->prepareStatement("UPDATE Devices SET Item_Date = ? WHERE Devices_List_ID = ?");
+                break;
+            default:
+                cout << "Invalid attribute choice." << endl;
+                return;
+            }
 
-            cout << "Item Price: ";
-            cin >> itemPrice;
-
-            cout << "Item Date (YYYY-MM-DD): ";
-            cin.ignore();
-            getline(cin, itemDate);
-
-            // Update the Device in the database
-            sql::PreparedStatement* pstmtUpdate = con->prepareStatement(
-                "UPDATE Devices SET Item_Name = ?, Item_Quantity = ?, Item_Condition = ?, "
-                "Item_Price = ?, Item_Date = ? WHERE Devices_List_ID = ?");
-
-            pstmtUpdate->setString(1, itemName);
-            pstmtUpdate->setInt(2, itemQuantity);
-            pstmtUpdate->setString(3, itemCondition);
-            pstmtUpdate->setDouble(4, itemPrice);
-            pstmtUpdate->setString(5, itemDate);
-            pstmtUpdate->setInt(6, deviceslistID);
+            pstmtUpdate->setString(1, updatedValue);
+            pstmtUpdate->setInt(2, deviceslistID);
 
             pstmtUpdate->execute();
             delete pstmtUpdate;
 
-            cout << "Device updated successfully!" << endl;
+            cout << "Device attribute updated successfully!" << endl;
         }
         else
         {

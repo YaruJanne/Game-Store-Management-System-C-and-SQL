@@ -14,15 +14,15 @@
 #include <cppconn/resultset.h>
 #include <cppconn/statement.h>
 #include <cppconn/prepared_statement.h>
+#pragma warning(disable : 26495)
 
 using namespace std;
 
 // Function declarations
 void itemMenu(sql::Connection* con);
 void processStaff(sql::Connection* con);
-void processCustomer(sql::Connection* con); 
+void processCustomer(sql::Connection* con);
 void enterCustomer(sql::Connection* con);
-
 void addNewPhysicalGame(sql::Connection* con);
 void addNewDevice(sql::Connection* con);
 void showPhysicalGames(sql::Connection* con);
@@ -33,13 +33,16 @@ void deletePhysicalGame(sql::Connection* con);
 void deleteDevice(sql::Connection* con);
 void displayAvailableItemsWithCondition(sql::Connection* con, const string& condition, bool includeCondition);
 void registerCustomer(sql::Connection* con);
-bool loginCustomer(sql::Connection* con, int& customerId, string& customerEmail, string& customerPassword);
-
+bool loginCustomer(sql::Connection* con, int& customerId);
 void staffMain(sql::Connection* con);
 void staffMenu(sql::Connection* con);
 
 //purchase 
-void orderMenu(sql::Connection* con);  
+void orderMenu(sql::Connection* con);
+void orderNewItems(sql::Connection* con, const string& customerEmail);
+void showOrder(sql::Connection* con, const string& customerEmail);
+
+
 
 void addStaffRecord(sql::Connection* con);
 void editStaffDetails(sql::Connection* con);
