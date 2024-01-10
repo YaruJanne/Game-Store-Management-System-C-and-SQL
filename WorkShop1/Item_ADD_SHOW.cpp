@@ -140,12 +140,30 @@ void showPhysicalGames(sql::Connection* con)
 
         delete res;
         delete stmt;
+
+        // Ask the customer if they want to order
+        cout << "\nDo you want to order? (y/n): ";
+        char orderChoice;
+        cin >> orderChoice;
+
+        if (orderChoice == 'y' || orderChoice == 'Y')
+        {
+            // Call the function to order new items
+            orderNewGames(con);
+        }
+        else
+        {
+            // Customer chose not to order, you can go back to the customer menu or perform other actions.
+            // Add your code here.
+            processCustomer(con);
+        }
     }
     catch (sql::SQLException e)
     {
         cout << "Error fetching Physical Games. Error message: " << e.what() << endl;
     }
 }
+
 
 void showDevices(sql::Connection* con)
 {
@@ -169,6 +187,22 @@ void showDevices(sql::Connection* con)
 
         delete res;
         delete stmt;
+
+        cout << "\nDo you want to order? (y/n): ";
+        char orderChoice;
+        cin >> orderChoice;
+
+        if (orderChoice == 'y' || orderChoice == 'Y')
+        {
+            // Call the function to order new items
+            orderNewDevice(con);
+        }
+        else
+        {
+            // Customer chose not to order, you can go back to the customer menu or perform other actions.
+            // Add your code here.
+            processCustomer(con);
+        }
     }
     catch (sql::SQLException e)
     {

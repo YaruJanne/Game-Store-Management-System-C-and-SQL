@@ -103,7 +103,7 @@ void registerCustomer(sql::Connection* con)
 
 // Customer.cpp
 
-void processCustomer(sql::Connection* con)
+void processCustomer(sql::Connection* con )
 {
     int customerOption;
     int customerID = 0;  // Variable to store the logged-in customer's ID

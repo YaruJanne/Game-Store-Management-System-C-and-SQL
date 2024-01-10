@@ -22,9 +22,7 @@ void orderMenu(sql::Connection* con)
         switch (orderChoice)
         {
         case 1:
-            // Order new items
-            // Implement logic to interact with the purchase record in the database
-            // You can create a function for this, e.g., orderNewItems(con, customerEmail);
+            orderNewGames(con);
             break;
         case 2:
             // Show existing orders
@@ -57,45 +55,213 @@ void orderMenu(sql::Connection* con)
 
 // Implement the orderNewItems and showOrder functions as needed
 
-void orderNewItems(sql::Connection* con, const string& customerEmail)
+void orderNewGames(sql::Connection* con)
 {
     try
     {
         con->setSchema("database");  // Replace 'your_database_name' with your actual database name
 
         // Prompt the user for order details
-        int gamesListID, devicesListID, purQuantity;
-        string purName;
+        string gamesListIDInput;
+        int purQuantity;
+        string purName, Cus_Email;
 
-        cout << "Enter Games_List_ID: ";
-        cin >> gamesListID;
+        // Prompt user for Games_List_ID
+        cout << "Enter Games_List_ID : ";
+        cin >> gamesListIDInput;
 
-        cout << "Enter Devices_List_ID: ";
-        cin >> devicesListID;
+        // Search for Games_List_ID in the physicalgames database
+        int gamesListID;
+        if (gamesListIDInput != "x") {
+            sql::PreparedStatement* pstmtGames = con->prepareStatement("SELECT * FROM physicalgames WHERE Games_List_ID = ?");
+            pstmtGames->setString(1, gamesListIDInput);
+            sql::ResultSet* resGames = pstmtGames->executeQuery();
 
-        cout << "Enter Pur_Name: ";
-        cin.ignore();
+            if (resGames->next()) {
+                gamesListID = resGames->getInt("Games_List_ID");
+            }
+            else {
+                cout << "Physical Game with Games_List_ID " << gamesListIDInput << " not found." << endl;
+                delete pstmtGames;
+                return;
+            }
+            delete pstmtGames;
+        }
+        /*
+        // Prompt user for Devices_List_ID
+        cout << "Enter Devices_List_ID (enter 'x' to skip): ";
+        cin >> devicesListIDInput;
+
+        // Search for Devices_List_ID in the devices database
+        int devicesListID;
+        if (devicesListIDInput != "x") {
+            sql::PreparedStatement* pstmtDevices = con->prepareStatement("SELECT * FROM devices WHERE Devices_List_ID = ?");
+            pstmtDevices->setString(1, devicesListIDInput);
+            sql::ResultSet* resDevices = pstmtDevices->executeQuery();
+
+            if (resDevices->next()) {
+                devicesListID = resDevices->getInt("Devices_List_ID");
+            }
+            else {
+                cout << "Device with Devices_List_ID " << devicesListIDInput << " not found." << endl;
+                delete pstmtDevices;
+                return;
+            }
+            delete pstmtDevices;
+        }
+        */
+        // Prompt user for Purchase Name
+        cout << "Enter Customer Name: ";
+        cin.ignore(); // Ignore any previous newline character in the buffer
         getline(cin, purName);
 
-        cout << "Enter Pur_Quantity: ";
+        cout << "Enter Customer Email: ";
+        getline(cin, Cus_Email);
+
+        // Prompt user for Purchase Quantity
+        cout << "Enter Purchase Quantity: ";
         cin >> purQuantity;
 
         // Perform the necessary SQL queries and updates here to add the new order to the purchase record
-        // Calculate Pur_Price by joining item prices from the physical games and devices tables
-        // and multiplying with Pur_Quantity.
-
         // Example SQL query (you'll need to adapt this based on your actual database schema):
-        string sqlQuery = "INSERT INTO purchase_record (Cus_Email, Games_List_ID, Devices_List_ID, Pur_Name, Pur_Quantity, Pur_Price, Pur_Date) "
-            "VALUES (?, ?, ?, ?, ?, (SELECT (Price * ?) FROM physical_games WHERE Games_List_ID = ?), CURRENT_DATE)";
+        string sqlQuery = "INSERT INTO purchasegames(Cus_Email, Games_List_ID, Pur_Name, Pur_Quantity, Pur_Price, Pur_Date) "
+            "VALUES (?, ?, ?, ?, (SELECT (Item_Price * ?) FROM physicalgames WHERE Games_List_ID = ?), CURRENT_DATE)";
 
         sql::PreparedStatement* pstmt = con->prepareStatement(sqlQuery);
-        pstmt->setString(1, customerEmail);
-        pstmt->setInt(2, gamesListID);
-        pstmt->setInt(3, devicesListID);
-        pstmt->setString(4, purName);
-        pstmt->setInt(5, purQuantity);
-        pstmt->setInt(6, purQuantity);  // Pur_Price calculated by multiplying with Pur_Quantity
-        pstmt->setInt(7, gamesListID);  // Games_List_ID for joining with physical_games table
+
+        pstmt->setString(1, Cus_Email);
+
+        if (gamesListIDInput != "x") {
+            pstmt->setInt(2, gamesListID);
+        }
+        else {
+            pstmt->setNull(2, sql::DataType::INTEGER);
+        }
+        /*
+        if (devicesListIDInput != "x") {
+            pstmt->setInt(3, devicesListID);
+        }
+        else {
+            pstmt->setNull(3, sql::DataType::INTEGER);
+        }*/
+
+        pstmt->setString(3, purName);
+        pstmt->setInt(4, purQuantity);
+        pstmt->setInt(5, purQuantity);  // Pur_Price calculated by multiplying with Pur_Quantity
+        if (gamesListIDInput != "x") {
+            pstmt->setInt(6, gamesListID);  // Games_List_ID for joining with physical_games table
+        }
+        else {
+            pstmt->setNull(6, sql::DataType::INTEGER);
+        }
+
+        pstmt->executeUpdate();
+        delete pstmt;
+
+        cout << "Order placed successfully!" << endl;
+    }
+    catch (sql::SQLException e)
+    {
+        cout << "Error placing order. Error message: " << e.what() << endl;
+    }
+}
+
+
+void orderNewDevice(sql::Connection* con)
+{
+    try
+    {
+        con->setSchema("database");  // Replace 'your_database_name' with your actual database name
+
+        // Prompt the user for order details
+        string devicesListIDInput;
+        int purQuantity;
+        string purName, Cus_Email;
+
+        /*
+        // Prompt user for Games_List_ID
+        cout << "Enter Games_List_ID : ";
+        cin >> gamesListIDInput;
+
+        // Search for Games_List_ID in the physicalgames database
+        int gamesListID;
+        if (gamesListIDInput != "x") {
+            sql::PreparedStatement* pstmtGames = con->prepareStatement("SELECT * FROM physicalgames WHERE Games_List_ID = ?");
+            pstmtGames->setString(1, gamesListIDInput);
+            sql::ResultSet* resGames = pstmtGames->executeQuery();
+
+            if (resGames->next()) {
+                gamesListID = resGames->getInt("Games_List_ID");
+            }
+            else {
+                cout << "Physical Game with Games_List_ID " << gamesListIDInput << " not found." << endl;
+                delete pstmtGames;
+                return;
+            }
+            delete pstmtGames;
+        }
+        */
+        
+        // Prompt user for Devices_List_ID
+        cout << "Enter Devices_List_ID (enter 'x' to skip): ";
+        cin >> devicesListIDInput;
+
+        // Search for Devices_List_ID in the devices database
+        int devicesListID;
+        if (devicesListIDInput != "x") {
+            sql::PreparedStatement* pstmtDevices = con->prepareStatement("SELECT * FROM devices WHERE Devices_List_ID = ?");
+            pstmtDevices->setString(1, devicesListIDInput);
+            sql::ResultSet* resDevices = pstmtDevices->executeQuery();
+
+            if (resDevices->next()) {
+                devicesListID = resDevices->getInt("Devices_List_ID");
+            }
+            else {
+                cout << "Device with Devices_List_ID " << devicesListIDInput << " not found." << endl;
+                delete pstmtDevices;
+                return;
+            }
+            delete pstmtDevices;
+        }
+        
+        // Prompt user for Purchase Name
+        cout << "Enter Customer Name: ";
+        cin.ignore(); // Ignore any previous newline character in the buffer
+        getline(cin, purName);
+
+        cout << "Enter Customer Email: ";
+        getline(cin, Cus_Email);
+
+        // Prompt user for Purchase Quantity
+        cout << "Enter Purchase Quantity: ";
+        cin >> purQuantity;
+
+        // Perform the necessary SQL queries and updates here to add the new order to the purchase record
+        // Example SQL query (you'll need to adapt this based on your actual database schema):
+        string sqlQuery = "INSERT INTO purchasedevices(Cus_Email, Devices_List_ID, Pur_Name, Pur_Quantity, Pur_Price, Pur_Date) "
+            "VALUES (?, ?, ?, ?, (SELECT (Item_Price * ?) FROM devices WHERE Devices_List_ID = ?), CURRENT_DATE)";
+
+        sql::PreparedStatement* pstmt = con->prepareStatement(sqlQuery);
+
+        pstmt->setString(1, Cus_Email);
+
+        
+        if (devicesListIDInput != "x") {
+            pstmt->setInt(2, devicesListID);
+        }
+        else {
+            pstmt->setNull(2, sql::DataType::INTEGER);
+        }
+
+        pstmt->setString(3, purName);
+        pstmt->setInt(4, purQuantity);
+        pstmt->setInt(5, purQuantity);  // Pur_Price calculated by multiplying with Pur_Quantity
+        if (devicesListIDInput != "x") {
+            pstmt->setInt(6, devicesListID);  // Games_List_ID for joining with physical_games table
+        }
+        else {
+            pstmt->setNull(6, sql::DataType::INTEGER);
+        }
 
         pstmt->executeUpdate();
         delete pstmt;

@@ -33,13 +33,14 @@ void deletePhysicalGame(sql::Connection* con);
 void deleteDevice(sql::Connection* con);
 void displayAvailableItemsWithCondition(sql::Connection* con, const string& condition, bool includeCondition);
 void registerCustomer(sql::Connection* con);
-bool loginCustomer(sql::Connection* con, int& customerId);
+bool loginCustomer(sql::Connection* con, int& customerId );
 void staffMain(sql::Connection* con);
 void staffMenu(sql::Connection* con);
 
 //purchase 
 void orderMenu(sql::Connection* con);
-void orderNewItems(sql::Connection* con, const string& customerEmail);
+void orderNewGames(sql::Connection* con );
+void orderNewDevice(sql::Connection* con);
 void showOrder(sql::Connection* con, const string& customerEmail);
 
 
