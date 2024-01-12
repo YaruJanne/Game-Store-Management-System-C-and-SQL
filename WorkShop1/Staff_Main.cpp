@@ -57,7 +57,7 @@ void staffMain(sql::Connection* con)
             adminWarranty(con);
             break;
         case 4:
-            // Existing code for customer functionality
+            showCustomerInfo(con);
             break;
         case 5:
             // Returning to the main menu

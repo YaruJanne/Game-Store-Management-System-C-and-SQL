@@ -1,4 +1,0 @@
-Purchase Receipt
------------------
-Purchase ID: 10
-Customer Email: 1

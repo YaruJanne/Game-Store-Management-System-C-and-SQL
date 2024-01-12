@@ -59,6 +59,8 @@ void showPurchaseDevices(sql::Connection* con);
 void adminWarranty(sql::Connection* con);
 void showWarrantyGames(sql::Connection* con);
 void showWarrantyDevices(sql::Connection* con);
+//Staff_Customer
+void showCustomerInfo(sql::Connection* con);
 
 
 

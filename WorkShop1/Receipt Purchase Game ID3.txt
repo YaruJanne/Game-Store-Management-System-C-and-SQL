@@ -1,9 +1,0 @@
-Purchase Receipt
------------------
-Purchase ID: 3
-Customer Email: 1
-Game ID: 1
-Purchase Name: 1
-Purchase Quantity: 1
-Purchase Price: 199.99
-Purchase Date: 2024-01-11

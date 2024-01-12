@@ -1,9 +1,0 @@
-Purchase Receipt
------------------
-Purchase ID: 7
-Customer Email: 1
-Device ID: 2
-Purchase Name: 1
-Purchase Quantity: 1
-Purchase Price: 299
-Purchase Date: 2024-01-13

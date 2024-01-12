@@ -1,9 +1,0 @@
-Purchase Receipt
------------------
-Purchase_ID: 15
-Customer Email: ayep@gmail.com
-Devices_List_ID: 1
-Purchase Name: Syarif
-Purchase Quantity: 1
-Purchase Price: 1399
-Purchase Date: 2024-01-11
