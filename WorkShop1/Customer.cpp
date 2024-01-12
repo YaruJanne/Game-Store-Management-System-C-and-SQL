@@ -103,7 +103,7 @@ void registerCustomer(sql::Connection* con)
 
 // Customer.cpp
 
-void processCustomer(sql::Connection* con )
+void processCustomer(sql::Connection* con)
 {
     int customerOption;
     int customerID = 0;  // Variable to store the logged-in customer's ID
@@ -145,17 +145,16 @@ void processCustomer(sql::Connection* con )
 
 void enterCustomer(sql::Connection* con)
 {
-    int customerChoice;  // Declare the variable outside the loop
+    char customerChoice;  // Declare the variable outside the loop
 
     do
     {
         cout << "Customer Menu:" << endl;
         cout << "1. Physical Game" << endl;
         cout << "2. Device" << endl;
-        cout << "3. Order" << endl;
-        cout << "4. Exit to Main Menu" << endl;
-        cout << "Enter your choice (1, 2, 3, or 4): ";
-        cin >> customerChoice;
+        cout << "3. Exit to Main Menu" << endl;  // Removed the "Order" option
+        cout << "Enter your choice (1, 2, or 3): ";
+        customerChoice = _getch() - '0';
 
         switch (customerChoice)
         {
@@ -166,14 +165,11 @@ void enterCustomer(sql::Connection* con)
             showDevices(con);
             break;
         case 3:
-            orderMenu(con);
-            break;
-        case 4:
             cout << "Exiting to Main Menu." << endl;
             return;
             break;
         default:
-            cout << "Invalid choice. Please enter 1, 2, 3, or 4." << endl;
+            cout << "Invalid choice. Please enter 1, 2, or 3." << endl;
             break;
         }
 
@@ -190,5 +186,5 @@ void enterCustomer(sql::Connection* con)
         {
             cout << "Going back to Main Menu." << endl;
         }
-    } while (customerChoice != 4);  // Repeat the loop until the user chooses to exit
+    } while (customerChoice != 3);  // Repeat the loop until the user chooses to exit
 }

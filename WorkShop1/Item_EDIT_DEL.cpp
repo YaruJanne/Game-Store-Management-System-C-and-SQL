@@ -177,12 +177,12 @@ void editDevice(sql::Connection* con)
 
 void editItem(sql::Connection* con)
 {
-    int itemTypeChoice;
+    char itemTypeChoice;
     cout << "Choose the item type to edit:" << endl;
     cout << "1. Physical Game" << endl;
     cout << "2. Device" << endl;
     cout << "Enter your choice (1 or 2): ";
-    cin >> itemTypeChoice;
+    itemTypeChoice = _getch() - '0';
 
     switch (itemTypeChoice)
     {
@@ -206,7 +206,7 @@ void deletePhysicalGame(sql::Connection* con)
     showPhysicalGames(con);
 
     int gameslistID;
-    cout << "Enter List ID of the Physical Game to delete (or 'x' to cancel): ";
+    cout << "Enter List ID of the Physical Game to delete (enter -1 to cancel): ";
     cin >> gameslistID;
 
     if (cin.fail())
@@ -218,11 +218,12 @@ void deletePhysicalGame(sql::Connection* con)
         return;
     }
 
-    if (gameslistID == 'x')
+    if (gameslistID == -1)
     {
         cout << "Returning to the staff menu." << endl;
         return;
     }
+
 
     try
     {

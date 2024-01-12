@@ -1,0 +1,9 @@
+Purchase Receipt
+-----------------
+Purchase ID: 13
+Customer Email: ayep@gmail.com
+Game ID: 2
+Purchase Name: kimjep
+Purchase Quantity: 1
+Purchase Price: 299
+Purchase Date: 2024-01-11

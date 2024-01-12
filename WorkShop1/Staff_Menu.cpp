@@ -2,7 +2,7 @@
 
 void staffMenu(sql::Connection* con)
 {
-    int staffChoice;
+    char staffChoice;
 
     do
     {
@@ -13,7 +13,7 @@ void staffMenu(sql::Connection* con)
         cout << "4. Show staff record" << endl;
         cout << "5. Exit" << endl;
         cout << "Enter your choice (1-5): ";
-        cin >> staffChoice;
+        staffChoice = _getch() - '0';
 
         switch (staffChoice)
         {

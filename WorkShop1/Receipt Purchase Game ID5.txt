@@ -1,0 +1,17 @@
+Purchase Receipt
+-----------------
+Purchase ID: 5
+Customer Email: Syaf@gmail.com
+Game ID: 1
+Purchase Name: Syafiq
+Purchase Quantity: 1
+Purchase Price: 199.99
+Purchase Date: 2024-01-13
+
+Warranty Details
+-----------------
+Warranty ID: 2
+Purchase ID: 5
+Item Name: God Of War
+Warranty Condition: VERIFIED
+Warranty Lasts Until: 2025-01-13

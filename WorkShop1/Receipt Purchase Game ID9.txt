@@ -1,0 +1,4 @@
+Purchase Receipt
+-----------------
+Purchase ID: 9
+Customer Email: ayep@gmail.com

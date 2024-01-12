@@ -1,0 +1,9 @@
+Purchase Receipt
+-----------------
+Purchase ID: 10
+Customer Email: jebat@gmail.com
+Device ID: 3
+Purchase Name: Jep
+Purchase Quantity: 4
+Purchase Price: 796
+Purchase Date: 2024-01-11

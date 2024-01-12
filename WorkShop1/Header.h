@@ -7,6 +7,8 @@
 #include <iostream>
 #include <iomanip>
 #include <vector>
+#include <fstream>
+#include <conio.h>
 
 #include "mysql_connection.h"
 #include <cppconn/driver.h>
@@ -33,23 +35,30 @@ void deletePhysicalGame(sql::Connection* con);
 void deleteDevice(sql::Connection* con);
 void displayAvailableItemsWithCondition(sql::Connection* con, const string& condition, bool includeCondition);
 void registerCustomer(sql::Connection* con);
-bool loginCustomer(sql::Connection* con, int& customerId );
+bool loginCustomer(sql::Connection* con, int& customerId);
 void staffMain(sql::Connection* con);
 void staffMenu(sql::Connection* con);
 
-//purchase 
+//Order
 void orderMenu(sql::Connection* con);
-void orderNewGames(sql::Connection* con );
+void orderNewGames(sql::Connection* con);
 void orderNewDevice(sql::Connection* con);
 void showOrder(sql::Connection* con, const string& customerEmail);
-
-
-
+void printReceiptToFileGames(sql::ResultSet* res, sql::Connection* con);
+void printReceiptToFileDevices(sql::ResultSet* res, sql::Connection* con);
+// staff
 void addStaffRecord(sql::Connection* con);
 void editStaffDetails(sql::Connection* con);
 void deleteStaffRecord(sql::Connection* con);
 void showStaffRecord(sql::Connection* con);
-
+//Staff_Order
+void purchaseRecordMenu(sql::Connection* con);
+void showPurchaseGames(sql::Connection* con);
+void showPurchaseDevices(sql::Connection* con);
+//Staff_Warranty
+void adminWarranty(sql::Connection* con);
+void showWarrantyGames(sql::Connection* con);
+void showWarrantyDevices(sql::Connection* con);
 
 
 

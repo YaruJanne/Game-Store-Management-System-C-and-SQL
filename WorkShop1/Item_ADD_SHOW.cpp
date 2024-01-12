@@ -1,3 +1,4 @@
+//Item_Add_Show.cpp
 
 #include "Header.h"
 
@@ -192,6 +193,7 @@ void showDevices(sql::Connection* con)
         char orderChoice;
         cin >> orderChoice;
 
+
         if (orderChoice == 'y' || orderChoice == 'Y')
         {
             // Call the function to order new items
@@ -209,8 +211,3 @@ void showDevices(sql::Connection* con)
         cout << "Error fetching Devices. Error message: " << e.what() << endl;
     }
 }
-
-
-
-
-

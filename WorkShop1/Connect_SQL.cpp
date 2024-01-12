@@ -23,7 +23,7 @@ int main()
         exit(1);
     }
 
-    int choice;
+    char choice;
 
     do
     {
@@ -33,7 +33,7 @@ int main()
         cout << "3. Exit" << endl;
         cout << "Enter your choice (1, 2, or 3): ";
 
-        cin >> choice;
+        choice = _getch() - '0';
 
         switch (choice)
         {

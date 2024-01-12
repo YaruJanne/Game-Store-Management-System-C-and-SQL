@@ -31,19 +31,19 @@ bool staffLogin()
 
 void staffMain(sql::Connection* con)
 {
-    int staffChoice;
+    char staffChoice;
 
     do
     {
         cout << "\nStaff Main Menu:" << endl;
         cout << "1. Item List" << endl;
-        cout << "2. Staff" << endl;
-        cout << "3. Purchase Record" << endl;
-        cout << "4. Warranty" << endl;
-        cout << "5. Customer" << endl;
-        cout << "6. Exit" << endl;
-        cout << "Enter your choice (1-6): ";
-        cin >> staffChoice;
+        cout << "2. Purchase Record" << endl;
+        cout << "3. Warranty" << endl;
+        cout << "4. Customer" << endl;
+        cout << "5. Exit" << endl;
+        cout << "Enter your choice (1-5): ";
+        //cin >> 
+        staffChoice = _getch() - '0';
 
         switch (staffChoice)
         {
@@ -51,34 +51,32 @@ void staffMain(sql::Connection* con)
             itemMenu(con);  // Go to the itemMenu
             break;
         case 2:
-            // Existing code for staff functionality
+            purchaseRecordMenu(con);
             break;
         case 3:
-            // Existing code for purchase record functionality
+            adminWarranty(con);
             break;
         case 4:
-            // Existing code for warranty functionality
-            break;
-        case 5:
             // Existing code for customer functionality
             break;
-        case 6:
+        case 5:
             // Returning to the main menu
             cout << "Returning to the Main Menu." << endl;
             return;  // Use return to exit the function and go back to int main
             break;
         default:
-            cout << "Invalid choice. Please enter a number between 1 and 3." << endl;
+            cout << "Invalid choice. Please enter a number between 1 and 5." << endl;
             break;
         }
 
-    } while (staffChoice != 6);
+    } while (staffChoice != 5);
 }
+
 
 
 void itemMenu(sql::Connection* con)
 {
-    int itemChoice;
+    char itemChoice;
 
     do
     {
@@ -89,7 +87,7 @@ void itemMenu(sql::Connection* con)
         cout << "4. Show Item" << endl;
         cout << "5. Exit" << endl;
         cout << "Enter your choice (1-5): ";
-        cin >> itemChoice;
+        itemChoice = _getch() - '0';
 
         switch (itemChoice)
         {
