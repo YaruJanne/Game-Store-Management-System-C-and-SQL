@@ -134,7 +134,9 @@
     <ClCompile Include="Connect_SQL.cpp" />
     <ClCompile Include="Customer.cpp" />
     <ClCompile Include="Order.cpp" />
+    <ClCompile Include="Sales_Report.cpp" />
     <ClCompile Include="Staff_Customer.cpp" />
+    <ClCompile Include="Staff_Show.cpp" />
     <ClCompile Include="Staff_Warranty.cpp" />
     <ClCompile Include="Staff_Order.cpp" />
     <ClCompile Include="Staff_Menu.cpp" />

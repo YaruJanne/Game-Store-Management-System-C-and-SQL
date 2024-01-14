@@ -66,7 +66,7 @@ void orderNewGames(sql::Connection* con)
         int purQuantity;
         string purName, Cus_Email;
 
-        cout << "Enter Games_List_ID (enter 'x' to skip): ";
+        cout << "Enter Games ID  ";
         cin >> gamesListIDInput;
 
         // Search for Devices_List_ID in the devices database
@@ -83,7 +83,7 @@ void orderNewGames(sql::Connection* con)
             }
             else
             {
-                cout << "Games with Games_List_ID " << gamesListIDInput << " not found." << endl;
+                cout << "Games with Games ID " << gamesListIDInput << " not found." << endl;
                 delete pstmtGames;
                 return;
             }
@@ -150,14 +150,17 @@ void orderNewGames(sql::Connection* con)
 
         if (res->next())
         {
-            cout << "\nLatest Purchase Details:\n";
-            cout << "Purchase ID: " << res->getInt("Purchase_ID") << endl;
-            cout << "Customer Email: " << res->getString("Cus_Email") << endl;
-            cout << "Game ID: " << res->getInt("Games_List_ID") << endl;
-            cout << "Purchase Name: " << res->getString("Pur_Name") << endl;
-            cout << "Purchase Quantity: " << res->getInt("Pur_Quantity") << endl;
-            cout << "Purchase Price: " << res->getDouble("Pur_Price") << endl;
-            cout << "Purchase Date: " << res->getString("Pur_Date") << endl;
+            system("cls");  // Clear the console screen
+            cout << "\n Purchase Details:\n";
+            cout << "+-----------------------------------------------+\n";
+            cout << "| Purchase ID       |: " << setw(14) << res->getInt("Purchase_ID") << endl;
+            cout << "| Customer Email    |: " << setw(10) << res->getString("Cus_Email") << endl;
+            cout << "| Game ID           |: " << setw(18) << res->getInt("Games_List_ID") << endl;
+            cout << "| Purchase Name     |: " << setw(13) << res->getString("Pur_Name") << endl;
+            cout << "| Purchase Quantity |: " << setw(7) << res->getInt("Pur_Quantity") << endl;
+            cout << "| Purchase Price    |: " << setw(10) << res->getDouble("Pur_Price") << endl;
+            cout << "| Purchase Date     |: " << setw(15) << res->getString("Pur_Date") << endl;
+            cout << "+-----------------------------------------------+\n";
 
             // Ask if the customer wants a receipt
             char printReceipt;
@@ -177,6 +180,7 @@ void orderNewGames(sql::Connection* con)
         cout << "Order placed successfully!" << endl;
 
     }
+    /*
     catch (sql::SQLException& e)
     {
         cout << "SQL Error: " << e.what() << endl;
@@ -185,9 +189,10 @@ void orderNewGames(sql::Connection* con)
     {
         cout << "Error: " << e.what() << endl;
     }
+    */
     catch (...)
     {
-        cout << "An unexpected error occurred." << endl;
+        cout << "Some data entered are wrong. Please re-enter." << endl;
     }
 }
 
@@ -228,7 +233,7 @@ void orderNewDevice(sql::Connection* con)
         */
 
         // Prompt user for Devices_List_ID
-        cout << "Enter Devices_List_ID (enter 'x' to skip): ";
+        cout << "Enter Device ID : ";
         cin >> devicesListIDInput;
 
         // Search for Devices_List_ID in the devices database
@@ -312,14 +317,17 @@ void orderNewDevice(sql::Connection* con)
 
         if (res->next())
         {
-            cout << "\nLatest Purchase Details:\n";
-            cout << "Purchase ID: " << res->getInt("Purchase_ID") << endl;
-            cout << "Customer Email: " << res->getString("Cus_Email") << endl;
-            cout << "Device ID: " << res->getInt("Devices_List_ID") << endl;
-            cout << "Purchase Name: " << res->getString("Pur_Name") << endl;
-            cout << "Purchase Quantity: " << res->getInt("Pur_Quantity") << endl;
-            cout << "Purchase Price: " << res->getDouble("Pur_Price") << endl;
-            cout << "Purchase Date: " << res->getString("Pur_Date") << endl;
+            system("cls");  // Clear the console screen
+            cout << "\n Purchase Details:\n";
+            cout << "+-----------------------------------------------+\n";
+            cout << "| Purchase ID       |: " << setw(14) << res->getInt("Purchase_ID") << endl;
+            cout << "| Customer Email    |: " << setw(10) << res->getString("Cus_Email") << endl;
+            cout << "| Device ID         |: " << setw(18) << res->getInt("Devices_List_ID") << endl;
+            cout << "| Purchase Name     |: " << setw(13) << res->getString("Pur_Name") << endl;
+            cout << "| Purchase Quantity |: " << setw(7) << res->getInt("Pur_Quantity") << endl;
+            cout << "| Purchase Price    |: " << setw(10) << res->getDouble("Pur_Price") << endl;
+            cout << "| Purchase Date     |: " << setw(15) << res->getString("Pur_Date") << endl;
+            cout << "+-----------------------------------------------+\n";
 
 
             // Ask if the customer wants a receipt
@@ -340,19 +348,21 @@ void orderNewDevice(sql::Connection* con)
         delete stmt;
 
         cout << "Order placed successfully!" << endl;
-     }
-     catch (sql::SQLException& e)
-     {
-         cout << "SQL Error: " << e.what() << endl;
-     }
-     catch (const std::exception& e)
-     {
-         cout << "Error: " << e.what() << endl;
-     }
-     catch (...)
-     {
-         cout << "An unexpected error occurred." << endl;
-     }
+    }
+    /*
+    catch (sql::SQLException& e)
+    {
+        cout << "SQL Error: " << e.what() << endl;
+    }
+    catch (const std::exception& e)
+    {
+        cout << "Error: " << e.what() << endl;
+    }
+    */
+    catch (...)
+    {
+        cout << "Some data entered are wrong. Please re-enter." << endl;
+    }
 }
 
     
@@ -361,16 +371,18 @@ void printReceiptToFileGames(sql::ResultSet* res, sql::Connection* con)
     // Create a new .txt file for the receipt
     string fileName = "Receipt Purchase Game ID" + to_string(res->getInt("Purchase_ID")) + ".txt";
     ofstream receiptFile(fileName);
+    system("cls");  // Clear the console screen
 
-    receiptFile << "Purchase Receipt" << endl;
-    receiptFile << "-----------------" << endl;
-    receiptFile << "Purchase ID: " << res->getInt("Purchase_ID") << endl;
-    receiptFile << "Customer Email: " << res->getString("Cus_Email") << endl;
-    receiptFile << "Game ID: " << res->getInt("Games_List_ID") << endl;
-    receiptFile << "Purchase Name: " << res->getString("Pur_Name") << endl;
-    receiptFile << "Purchase Quantity: " << res->getInt("Pur_Quantity") << endl;
-    receiptFile << "Purchase Price: " << res->getDouble("Pur_Price") << endl;
-    receiptFile << "Purchase Date: " << res->getString("Pur_Date") << endl;
+    receiptFile << "\n Purchase Receipt:\n";
+    receiptFile << "+-----------------------------------------------+\n";
+    receiptFile << "| Purchase ID       |: " << res->getInt("Purchase_ID") << endl;
+    receiptFile << "| Customer Email    |: " << res->getString("Cus_Email") << endl;
+    receiptFile << "| Game ID           |: " << res->getInt("Games_List_ID") << endl;
+    receiptFile << "| Purchase Name     |: " << res->getString("Pur_Name") << endl;
+    receiptFile << "| Purchase Quantity |: " << res->getInt("Pur_Quantity") << endl;
+    receiptFile << "| Purchase Price    |: " << res->getDouble("Pur_Price") << endl;
+    receiptFile << "| Purchase Date     |: " << res->getString("Pur_Date") << endl;
+    receiptFile << "+-----------------------------------------------+\n";
 
 
     // Get the latest Purchase_ID
@@ -414,14 +426,16 @@ void printReceiptToFileGames(sql::ResultSet* res, sql::Connection* con)
     // Check if warranty information is available
     if (resWarranty->next())
     {
-        receiptFile << "\nWarranty Details" << endl;
-        receiptFile << "-----------------" << endl;
-        receiptFile << "Warranty ID: " << resWarranty->getInt("Warranty_ID") << endl;
-        receiptFile << "Purchase ID: " << resWarranty->getInt("Purchase_ID") << endl;
-        receiptFile << "Item Name: " << resWarranty->getString("Wty_name") << endl;
-        receiptFile << "Warranty Condition: " << resWarranty->getString("Wty_Condition") << endl;
-        receiptFile << "Warranty Lasts Until: " << resWarranty->getString("Wty_Date") << endl;
+        receiptFile << "\n Warranty Details \n" << endl;
+        receiptFile << "+-----------------------------------------------+\n";
+        receiptFile << "Warranty ID           |: " << resWarranty->getInt("Warranty_ID") << endl;
+        receiptFile << "Purchase ID           |: " << resWarranty->getInt("Purchase_ID") << endl;
+        receiptFile << "Item Name             |: " << resWarranty->getString("Wty_name") << endl;
+        receiptFile << "Warranty Condition    |: " << resWarranty->getString("Wty_Condition") << endl;
+        receiptFile << "Warranty Lasts Until  |: " << resWarranty->getString("Wty_Date") << endl;
+        receiptFile << "+-----------------------------------------------+\n";
     }
+
 
     receiptFile.close();
 
@@ -437,15 +451,17 @@ void printReceiptToFileDevices(sql::ResultSet* res, sql::Connection* con)
     string fileName = "Receipt Purchase Device ID" + to_string(res->getInt("Purchase_ID")) + ".txt";
     ofstream receiptFile(fileName);
 
-    receiptFile << "Purchase Receipt" << endl;
-    receiptFile << "-----------------" << endl;
-    receiptFile << "Purchase ID: " << res->getInt("Purchase_ID") << endl;
-    receiptFile << "Customer Email: " << res->getString("Cus_Email") << endl;
-    receiptFile << "Device ID: " << res->getInt("Devices_List_ID") << endl;
-    receiptFile << "Purchase Name: " << res->getString("Pur_Name") << endl;
-    receiptFile << "Purchase Quantity: " << res->getInt("Pur_Quantity") << endl;
-    receiptFile << "Purchase Price: " << res->getDouble("Pur_Price") << endl;
-    receiptFile << "Purchase Date: " << res->getString("Pur_Date") << endl;
+    system("cls");  // Clear the console screen
+    receiptFile << "\n Purchase Receipt:\n";
+    receiptFile << "+-----------------------------------------------+\n";
+    receiptFile << "| Purchase ID       |: " << res->getInt("Purchase_ID") << endl;
+    receiptFile << "| Customer Email    |: " << res->getString("Cus_Email") << endl;
+    receiptFile << "| DeviceID          |: " << res->getInt("Devices_List_ID") << endl;
+    receiptFile << "| Purchase Name     |: " << res->getString("Pur_Name") << endl;
+    receiptFile << "| Purchase Quantity |: " << res->getInt("Pur_Quantity") << endl;
+    receiptFile << "| Purchase Price    |: " << res->getDouble("Pur_Price") << endl;
+    receiptFile << "| Purchase Date     |: " << res->getString("Pur_Date") << endl;
+    receiptFile << "+-----------------------------------------------+\n";
 
     // Get the latest Purchase_ID
     int latestPurchaseID = res->getInt("Purchase_ID");
@@ -488,13 +504,14 @@ void printReceiptToFileDevices(sql::ResultSet* res, sql::Connection* con)
     // Check if warranty information is available
     if (resWarranty->next())
     {
-        receiptFile << "\nWarranty Details" << endl;
-        receiptFile << "-----------------" << endl;
-        receiptFile << "Warranty ID: " << resWarranty->getInt("Warranty_ID") << endl;
-        receiptFile << "Purchase ID: " << resWarranty->getInt("Purchase_ID") << endl;
-        receiptFile << "Item Name: " << resWarranty->getString("Wty_name") << endl;
-        receiptFile << "Warranty Condition: " << resWarranty->getString("Wty_Condition") << endl;
-        receiptFile << "Warranty Lasts Until: " << resWarranty->getString("Wty_Date") << endl;
+        receiptFile << "\n Warranty Details \n" << endl;
+        receiptFile << "+-----------------------------------------------+\n";
+        receiptFile << "Warranty ID           |: " << resWarranty->getInt("Warranty_ID") << endl;
+        receiptFile << "Purchase ID           |: " << resWarranty->getInt("Purchase_ID") << endl;
+        receiptFile << "Item Name             |: " << resWarranty->getString("Wty_name") << endl;
+        receiptFile << "Warranty Condition    |: " << resWarranty->getString("Wty_Condition") << endl;
+        receiptFile << "Warranty Lasts Until  |: " << resWarranty->getString("Wty_Date") << endl;
+        receiptFile << "+-----------------------------------------------+\n";
     }
 
     receiptFile.close();

@@ -8,19 +8,26 @@ void purchaseRecordMenu(sql::Connection* con)
 
     do
     {
-        cout << "\nPurchase Record Menu:" << endl;
-        cout << "1. Physical Games" << endl;
-        cout << "2. Devices" << endl;
-        cout << "3. Back to Staff Main Menu" << endl;
-        cout << "Enter your choice (1-3): ";
+        system("cls");  // Clear the console screen
+        cout << "+---------------------------+\n";
+        cout << "|    Purchase Record Menu   |\n";
+        cout << "+---------------------------+\n";
+        cout << "| 1. Physical Games         |\n";
+        cout << "| 2. Devices                |\n";
+        cout << "| 3. Back to Admin Main Menu|\n";
+        cout << "+---------------------------+\n";
+        cout << "|  Enter your choice (1-3)  |\n";
+        cout << "+---------------------------+\n";
         purchaseRecordChoice = _getch() - '0';
 
         switch (purchaseRecordChoice)
         {
         case 1:
+            system("cls");  // Clear the console screen
             showPurchaseGames(con);
             break;
         case 2:
+            system("cls");  // Clear the console screen
             showPurchaseDevices(con);
             break;
         case 3:
@@ -38,6 +45,7 @@ void purchaseRecordMenu(sql::Connection* con)
 
 void showPurchaseGames(sql::Connection* con)
 {
+    system("cls");  // Clear the console screen
     try
     {
         // Connect to the database
@@ -49,22 +57,23 @@ void showPurchaseGames(sql::Connection* con)
 
         // Display the data
         cout << "\nPurchase Games Table:\n";
-        cout << "-----------------------------------------------------------------------------\n";
-        cout << "Purchase_ID | Cus_Email | Games_List_ID | Pur_Name | Pur_Quantity | Pur_Price | Pur_Date\n";
-        cout << "-----------------------------------------------------------------------------\n";
+        cout << "-------------------------------------------------------------------------------------------------------------------------\n";
+        cout << " Purchase_ID |       Cus_Email      | Games_List_ID |         Pur_Name         | Pur_Quantity | Pur_Price |   Pur_Date  |\n";
+        cout << "-------------------------------------------------------------------------------------------------------------------------\n";
 
         while (res->next())
         {
-            cout << setw(12) << res->getInt("Purchase_ID");
-            cout << setw(12) << res->getString("Cus_Email");
+            cout << "\n" << left;
+            cout << setw(14) << res->getInt("Purchase_ID");
+            cout << setw(25) << res->getString("Cus_Email");
             cout << setw(15) << res->getInt("Games_List_ID");
-            cout << setw(10) << res->getString("Pur_Name");
+            cout << setw(26) << res->getString("Pur_Name");
             cout << setw(15) << res->getInt("Pur_Quantity");
-            cout << setw(12) << res->getDouble("Pur_Price");
-            cout << setw(12) << res->getString("Pur_Date") << endl;
+            cout << setw(14) << res->getDouble("Pur_Price");
+            cout << setw(14) << res->getString("Pur_Date") << endl;
         }
 
-        cout << "-----------------------------------------------------------------------------\n";
+        cout << "--------------------------------------------------------------------------------------------------------------------\n";
 
         // Clean up
         delete res;
@@ -100,6 +109,7 @@ void showPurchaseGames(sql::Connection* con)
 
 void showPurchaseDevices(sql::Connection* con)
 {
+    system("cls");  // Clear the console screen
     try
     {
         // Connect to the database
@@ -111,22 +121,23 @@ void showPurchaseDevices(sql::Connection* con)
 
         // Display the data
         cout << "\nPurchase Devices Table:\n";
-        cout << "-----------------------------------------------------------------------------\n";
-        cout << "Purchase_ID | Cus_Email | Devices_List_ID | Pur_Name | Pur_Quantity | Pur_Price | Pur_Date\n";
-        cout << "-----------------------------------------------------------------------------\n";
+        cout << "-------------------------------------------------------------------------------------------------------------------------\n";
+        cout << " Purchase_ID |       Cus_Email      | Devices_List_ID |        Pur_Name        | Pur_Quantity | Pur_Price |   Pur_Date  |\n";
+        cout << "-------------------------------------------------------------------------------------------------------------------------\n";
 
         while (res->next())
         {
-            cout << setw(12) << res->getInt("Purchase_ID");
-            cout << setw(12) << res->getString("Cus_Email");
-            cout << setw(18) << res->getInt("Devices_List_ID");
-            cout << setw(10) << res->getString("Pur_Name");
+            cout << "\n" << left;
+            cout << setw(14) << res->getInt("Purchase_ID");
+            cout << setw(25) << res->getString("Cus_Email");
+            cout << setw(15) << res->getInt("Devices_List_ID");
+            cout << setw(26) << res->getString("Pur_Name");
             cout << setw(15) << res->getInt("Pur_Quantity");
-            cout << setw(12) << res->getDouble("Pur_Price");
-            cout << setw(12) << res->getString("Pur_Date") << endl;
+            cout << setw(14) << res->getDouble("Pur_Price");
+            cout << setw(14) << res->getString("Pur_Date") << endl;
         }
 
-        cout << "-----------------------------------------------------------------------------\n";
+        cout << "--------------------------------------------------------------------------------------------------------------------\n";
 
         // Clean up
         delete res;

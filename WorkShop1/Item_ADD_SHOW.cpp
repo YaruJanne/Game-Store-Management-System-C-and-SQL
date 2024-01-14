@@ -5,7 +5,12 @@
 
 void addNewPhysicalGame(sql::Connection* con)
 {
-    cout << "\nAdding a new Physical Game:" << endl;
+
+    system("cls");  // Clear the console screen
+    cout << "+------------------------------------------------+" << endl;
+    cout << "|              Adding a new Physical Game        |" << endl;
+    cout << "+------------------------------------------------+" << endl;
+    
 
     // Get user input for each attribute
     int gameslistID;
@@ -13,24 +18,24 @@ void addNewPhysicalGame(sql::Connection* con)
     int itemQuantity;
     double itemPrice;
 
-    cout << "\nPhysical Game ID: ";
+    cout << "\n| Physical Game ID        | : ";
     cin >> gameslistID;
 
-    cout << "Item Name: ";
+    cout << "\n| Item Name               | : ";
     cin.ignore(); // Ignore any previous newline character in the buffer
     getline(cin, itemName);
 
-    cout << "Item Quantity: ";
+    cout << "\n| Item Quantity           | : ";
     cin >> itemQuantity;
 
-    cout << "Item Condition: ";
+    cout << "\n| Item Condition          | : ";
     cin.ignore();
     getline(cin, itemCondition);
 
-    cout << "Item Price: ";
+    cout << "\n| Item Price              | : ";
     cin >> itemPrice;
 
-    cout << "Item Date (YYYY-MM-DD): ";
+    cout << "\n| Item Date (YYYY-MM-DD)  | : ";
     cin.ignore();
     getline(cin, itemDate);
 
@@ -63,7 +68,10 @@ void addNewPhysicalGame(sql::Connection* con)
 
 void addNewDevice(sql::Connection* con)
 {
-    cout << "\nAdding a new Device:" << endl;
+    
+    cout << "+------------------------------------------------+" << endl;
+    cout << "|              Adding a new Device               |" << endl;
+    cout << "+------------------------------------------------+" << endl;
 
     // Get user input for each attribute
     int deviceslistID;
@@ -71,24 +79,24 @@ void addNewDevice(sql::Connection* con)
     int itemQuantity;
     double itemPrice;
 
-    cout << "\n Device ID: ";
+    cout << "\n| Device ID               | : ";
     cin >> deviceslistID;
 
-    cout << "Item Name: ";
+    cout << "\n| Item Name               | : ";
     cin.ignore(); // Ignore any previous newline character in the buffer
     getline(cin, itemName);
 
-    cout << "Item Quantity: ";
+    cout << "\n| Item Quantity           | : ";
     cin >> itemQuantity;
 
-    cout << "Item Condition: ";
+    cout << "\n| Item Condition          | : ";
     cin.ignore();
     getline(cin, itemCondition);
 
-    cout << "Item Price: ";
+    cout << "\n| Item Price              | : ";
     cin >> itemPrice;
 
-    cout << "Item Date (YYYY-MM-DD): ";
+    cout << "\n| Item Date (YYYY-MM-DD)  | : ";
     cin.ignore();
     getline(cin, itemDate);
 
@@ -128,16 +136,17 @@ void showPhysicalGames(sql::Connection* con)
         sql::Statement* stmt = con->createStatement();
         sql::ResultSet* res = stmt->executeQuery("SELECT * FROM PhysicalGames");
 
-        cout << "Physical Games:" << endl;
-        cout << left << setw(8) << "Games_List_ID" << setw(20) << "Item_Name" << setw(15) << "Item_Quantity"
-            << setw(15) << "Item_Condition" << setw(15) << "Item_Price" << setw(15) << "Item_Date" << endl;
+        cout << "Physical Games" << endl;
+        cout << "\n" << left << setw(14) << "Games ID" << setw(35) << "Item Name" << setw(18) << "Item Quantity"
+            << setw(18) << "Item Condition" << setw(18) << "Item Price" << setw(18) << "Item Date" << endl;
 
         while (res->next())
         {
-            cout << left << setw(8) << res->getInt("Games_List_ID") << setw(20) << res->getString("Item_Name")
-                << setw(15) << res->getInt("Item_Quantity") << setw(15) << res->getString("Item_Condition")
-                << setw(15) << res->getDouble("Item_Price") << setw(15) << res->getString("Item_Date") << endl;
+            cout << left << setw(14) << res->getInt("Games_List_ID") << setw(35) << res->getString("Item_Name")
+                << setw(18) << res->getInt("Item_Quantity") << setw(18) << res->getString("Item_Condition")
+                << setw(18) << res->getDouble("Item_Price") << setw(18) << res->getString("Item_Date") << endl;
         }
+
 
         delete res;
         delete stmt;
@@ -156,7 +165,7 @@ void showPhysicalGames(sql::Connection* con)
         {
             // Customer chose not to order, you can go back to the customer menu or perform other actions.
             // Add your code here.
-            processCustomer(con);
+            enterCustomer(con);
         }
     }
     catch (sql::SQLException e)
@@ -175,15 +184,15 @@ void showDevices(sql::Connection* con)
         sql::Statement* stmt = con->createStatement();
         sql::ResultSet* res = stmt->executeQuery("SELECT * FROM Devices");
 
-        cout << "Devices:" << endl;
-        cout << left << setw(8) << "Devices_list_ID" << setw(20) << "Item_Name" << setw(15) << "Item_Quantity"
-            << setw(15) << "Item_Condition" << setw(15) << "Item_Price" << setw(15) << "Item_Date" << endl;
+        cout << "Devices" << endl;
+        cout <<"\n"<< left << setw(14) << "Devices ID" << setw(35) << "Item Name" << setw(18) << "Item Quantity"
+            << setw(18) << "Item Condition" << setw(18) << "Item Price" << setw(18) << "Item Date" << endl;
 
         while (res->next())
         {
-            cout << left << setw(8) << res->getInt("Devices_List_ID") << setw(20) << res->getString("Item_Name")
-                << setw(15) << res->getInt("Item_Quantity") << setw(15) << res->getString("Item_Condition")
-                << setw(15) << res->getDouble("Item_Price") << setw(15) << res->getString("Item_Date") << endl;
+            cout << left << setw(14) << res->getInt("Devices_List_ID") << setw(35) << res->getString("Item_Name")
+                << setw(18) << res->getInt("Item_Quantity") << setw(18) << res->getString("Item_Condition")
+                << setw(18) << res->getDouble("Item_Price") << setw(18) << res->getString("Item_Date") << endl;
         }
 
         delete res;
@@ -203,7 +212,7 @@ void showDevices(sql::Connection* con)
         {
             // Customer chose not to order, you can go back to the customer menu or perform other actions.
             // Add your code here.
-            processCustomer(con);
+            enterCustomer(con);
         }
     }
     catch (sql::SQLException e)

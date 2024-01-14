@@ -1,0 +1,17 @@
+Purchase Receipt
+-----------------
+Purchase ID: 10
+Customer Email: ayep@gmail.com
+Game ID: 4
+Purchase Name: Ayep
+Purchase Quantity: 1
+Purchase Price: 299
+Purchase Date: 2024-01-14
+
+Warranty Details
+-----------------
+Warranty ID: 10
+Purchase ID: 10
+Item Name: Tekken 8 
+Warranty Condition: VERIFIED
+Warranty Lasts Until: 2025-01-14

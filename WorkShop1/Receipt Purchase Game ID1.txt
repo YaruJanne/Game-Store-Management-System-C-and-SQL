@@ -1,0 +1,17 @@
+Purchase Receipt
+-----------------
+Purchase ID: 1
+Customer Email: ayep@gmail.com
+Game ID: 6
+Purchase Name: Syarif
+Purchase Quantity: 2
+Purchase Price: 488
+Purchase Date: 2024-01-13
+
+Warranty Details
+-----------------
+Warranty ID: 3
+Purchase ID: 1
+Item Name: Street Fighter 6
+Warranty Condition: VERIFIED
+Warranty Lasts Until: 2025-01-13

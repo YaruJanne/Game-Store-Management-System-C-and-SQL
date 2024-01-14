@@ -9,6 +9,10 @@
 #include <vector>
 #include <fstream>
 #include <conio.h>
+#include <string>
+#include <cmath>
+
+
 
 #include "mysql_connection.h"
 #include <cppconn/driver.h>
@@ -61,6 +65,11 @@ void showWarrantyGames(sql::Connection* con);
 void showWarrantyDevices(sql::Connection* con);
 //Staff_Customer
 void showCustomerInfo(sql::Connection* con);
+//Sales_Report
+void salesReport(sql::Connection* con);
+//Staff_Show
+void showStaffPhysicalGames(sql::Connection* con);
+void showStaffDevices(sql::Connection* con);
 
 
 

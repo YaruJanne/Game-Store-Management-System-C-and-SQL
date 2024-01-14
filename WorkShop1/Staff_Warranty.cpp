@@ -5,22 +5,28 @@
 void adminWarranty(sql::Connection* con)
 {
     char adminWarranty;
-
+    system("cls");  // Clear the console screen
     do
     {
-        cout << "\nWarranty Admin:" << endl;
-        cout << "1. Physical Games" << endl;
-        cout << "2. Devices" << endl;
-        cout << "3. Back to Staff Main Menu" << endl;
-        cout << "Enter your choice (1-3): ";
+        cout << "+---------------------------+" << endl;
+        cout << "|      Warranty Admin       |" << endl;
+        cout << "+---------------------------+" << endl;
+        cout << "| 1. Physical Games         |" << endl;
+        cout << "| 2. Devices                |" << endl;
+        cout << "| 3. Back to Staff Main Menu|" << endl;
+        cout << "+---------------------------+" << endl;
+        cout << "|  Enter your choice (1-3)  |" << endl;
+        cout << "+---------------------------+" << endl;
         adminWarranty = _getch() - '0';
 
         switch (adminWarranty)
         {
         case 1:
+            system("cls");  // Clear the console screen
             showWarrantyGames(con);
             break;
         case 2:
+            system("cls");  // Clear the console screen
             showWarrantyDevices(con);
             break;
         case 3:
@@ -39,6 +45,8 @@ void adminWarranty(sql::Connection* con)
 
 void showWarrantyGames(sql::Connection* con)
 {
+
+    system("cls");  // Clear the console screen
     try
     {
         // Connect to the database
@@ -50,20 +58,21 @@ void showWarrantyGames(sql::Connection* con)
 
         // Display the data
         cout << "\nWarranty Games Table:\n";
-        cout << "-------------------------------------------------------------------------\n";
-        cout << "Warranty_ID | Purchase_ID | Wty_name | Wty_Condition | Wty_Date\n";
-        cout << "-------------------------------------------------------------------------\n";
+        cout << "-------------------------------------------------------------------------------------\n";
+        cout << "Warranty_ID | Purchase_ID |        Wty_Name        |   Wty_Condition   |   Wty_Date  \n";
+        cout << "-------------------------------------------------------------------------------------\n";
 
         while (res->next())
         {
+            cout << "\n" << left;
             cout << setw(12) << res->getInt("Warranty_ID");
             cout << setw(14) << res->getInt("Purchase_ID");
-            cout << setw(9) << res->getString("Wty_name");
-            cout << setw(16) << res->getString("Wty_Condition");
+            cout << setw(27) << res->getString("Wty_name");
+            cout << setw(20) << res->getString("Wty_Condition");
             cout << setw(12) << res->getString("Wty_Date") << endl;
         }
 
-        cout << "-------------------------------------------------------------------------\n";
+        cout << "------------------------------------------------------------------------------------\n";
 
         // Clean up
         delete res;
@@ -99,8 +108,10 @@ void showWarrantyGames(sql::Connection* con)
 
 void showWarrantyDevices(sql::Connection* con)
 {
+    system("cls");  // Clear the console screen
     try
     {
+        system("cls");  // Clear the console screen
         // Connect to the database
         con->setSchema("database");  // Replace 'your_database_name' with your actual database name
 
@@ -110,20 +121,21 @@ void showWarrantyDevices(sql::Connection* con)
 
         // Display the data
         cout << "\nWarranty Devices Table:\n";
-        cout << "---------------------------------------------------------------------------\n";
-        cout << "Warranty_ID | Purchase_ID | Wty_name | Wty_Condition | Wty_Date\n";
-        cout << "---------------------------------------------------------------------------\n";
+        cout << "-------------------------------------------------------------------------------------\n";
+        cout << "Warranty_ID | Purchase_ID |        Wty_Name        |   Wty_Condition   |   Wty_Date  \n";
+        cout << "-------------------------------------------------------------------------------------\n";
 
         while (res->next())
         {
+            cout << "\n" << left;
             cout << setw(12) << res->getInt("Warranty_ID");
             cout << setw(14) << res->getInt("Purchase_ID");
-            cout << setw(9) << res->getString("Wty_name");
-            cout << setw(16) << res->getString("Wty_Condition");
+            cout << setw(27) << res->getString("Wty_name");
+            cout << setw(20) << res->getString("Wty_Condition");
             cout << setw(12) << res->getString("Wty_Date") << endl;
         }
 
-        cout << "---------------------------------------------------------------------------\n";
+        cout << "------------------------------------------------------------------------------------\n";
 
         // Clean up
         delete res;

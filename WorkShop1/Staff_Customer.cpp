@@ -5,6 +5,7 @@
 
 void showCustomerInfo(sql::Connection* con)
 {
+    system("cls");  // Clear the console screen
     try
     {
         // Connect to the database
@@ -29,6 +30,7 @@ void showCustomerInfo(sql::Connection* con)
         // Display the data
         while (res->next()) {
             for (int i = 1; i <= columnCount; ++i) {
+                cout << left;
                 cout << res->getString(i) << " | ";
             }
             cout << endl;
@@ -67,4 +69,5 @@ void showCustomerInfo(sql::Connection* con)
         cout << "An unexpected error occurred." << endl;
     }
 }
+
 

@@ -1,0 +1,17 @@
+Purchase Receipt
+-----------------
+Purchase ID: 9
+Customer Email: Yarujanne@gmail.com
+Device ID: 7
+Purchase Name: Syafiq
+Purchase Quantity: 1
+Purchase Price: 2369
+Purchase Date: 2024-01-14
+
+Warranty Details
+-----------------
+Warranty ID: 9
+Purchase ID: 9
+Item Name: Steam Deck
+Warranty Condition: VERIFIED
+Warranty Lasts Until: 2025-01-14

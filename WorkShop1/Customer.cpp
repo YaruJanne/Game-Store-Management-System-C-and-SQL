@@ -7,135 +7,181 @@
 
 bool loginCustomer(sql::Connection* con, int& customerId)
 {
-    cout << "\nCustomer Login:" << endl;
-
+    
     // Get user input for login
     string email, password;
+    char confirmation;
+    system("cls");  // Clear the console screen
 
-    cout << "Enter Email: ";
-    cin.ignore();
-    getline(cin, email);
-
-    cout << "Enter Password: ";
-    getline(cin, password);
-
-    try
+    cout << "Do you want to continue with the login? (y/n): ";
+    cin >> confirmation;
+  
+    if (confirmation == 'y' || confirmation == 'Y')
     {
-        con->setSchema("database");  // Replace 'your_database_name' with your actual database name
+        std::cout << "+----------------------------------------+" << std::endl;
+        std::cout << "|              Customer Login            |" << std::endl;
+        std::cout << "|----------------------------------------|" << std::endl;
 
-        // Check if the entered email and password match a customer in the database
-        sql::PreparedStatement* pstmt = con->prepareStatement(
-            "SELECT Cus_Name FROM customer WHERE Cus_Email = ? AND Cus_password = ?");
-        pstmt->setString(1, email);
-        pstmt->setString(2, password);
 
-        sql::ResultSet* res = pstmt->executeQuery();
+        std::cout << "| Enter Email    | : ";
+        cin.ignore();
+        getline(cin, email);
 
-        if (res->next())
+
+        std::cout << "| Enter Password | : ";
+        getline(cin, password);
+        std::cout << "+----------------------------------------+" << std::endl;
+
+
+        try
         {
-            cout << " Login Success." << endl;
-            enterCustomer(con);
-            delete pstmt;
+            con->setSchema("database");  // Replace 'your_database_name' with your actual database name
 
+            // Check if the entered email and password match a customer in the database
+            sql::PreparedStatement* pstmt = con->prepareStatement(
+                "SELECT Cus_Name FROM customer WHERE Cus_Email = ? AND Cus_password = ?");
+            pstmt->setString(1, email);
+            pstmt->setString(2, password);
+
+            sql::ResultSet* res = pstmt->executeQuery();
+
+            if (res->next())
+            {
+                system("cls");  // Clear the console screen
+                cout << " \nLogin Success." << endl;
+                enterCustomer(con);
+                delete pstmt;
+
+            }
+            else  
+            {
+                system("cls");  // Clear the console screen
+                cout << "Wrong email or password. Login failed." << endl;
+                delete res;
+                delete pstmt;
+                return false;  // Login failed
+            }
         }
-        else
+        catch (sql::SQLException e)
         {
-            cout << "Wrong email or password. Login failed." << endl;
-            delete res;
-            delete pstmt;
-            return false;  // Login failed
+            cout << "Error logging in. Error message: " << e.what() << endl;
+            return false;  // Return false on error
         }
     }
-    catch (sql::SQLException e)
+    else
     {
-        cout << "Error logging in. Error message: " << e.what() << endl;
-        return false;  // Return false on error
+        cout << "Registration canceled. Returning to the Customer Options." << endl;
+        processCustomer(con);
     }
 }
 
 void registerCustomer(sql::Connection* con)
 {
-    cout << "\nCustomer Registration:" << endl;
-
+    system("cls");  // Clear the console screen
     // Get user input for registration
     string name, telno, email, password;
+    char confirmation;
 
-    cout << "Enter Name: ";
-    cin.ignore();
-    getline(cin, name);
+    cout << "Do you want to continue with the registration? (y/n): ";
+    cin >> confirmation;
+  
+    
+    if (confirmation == 'y' || confirmation == 'Y') {
 
-    cout << "Enter Telephone Number: ";
-    getline(cin, telno);
+        std::cout << "+------------------------------------------------+" << std::endl;
+        std::cout << "|              Customer Registration             |" << std::endl;
+        std::cout << "|------------------------------------------------|" << std::endl;
 
-    cout << "Enter Email: ";
-    getline(cin, email);
+        std::cout << "| Enter Name | : " << std::endl;
+        cin.ignore();
+        getline(cin, name);
 
-    cout << "Enter Password: ";
-    getline(cin, password);
+        std::cout << "| Enter Telephone Number | : " << std::endl;
+        getline(cin, telno);
 
-    try
-    {
-        con->setSchema("database");  // Replace 'your_database_name' with your actual database name
+        std::cout << "| Enter Email | : " << std::endl;
+        getline(cin, email);
 
-        // Automatically assign Customer_ID starting with 01 for every registration
-        //int newCustomerId = getNextCustomerId(con);
+        std::cout << "| Enter Password | : " << std::endl;
+        getline(cin, password);
+        std::cout << "|------------------------------------------------|" << std::endl;
 
-        // Insert the new customer into the database
-        sql::PreparedStatement* pstmt = con->prepareStatement(
-            "INSERT INTO customer (Cus_Name, Cus_Telno, Cus_Email, Cus_password) VALUES ( ?, ?, ?, ?)");
+        try {
+            con->setSchema("database");  // Replace 'your_database_name' with your actual database name
 
+            sql::PreparedStatement* pstmt = con->prepareStatement(
+                "INSERT INTO customer (Cus_Name, Cus_Telno, Cus_Email, Cus_password) VALUES (?, ?, ?, ?)");
 
-        pstmt->setString(1, name);
-        pstmt->setString(2, telno);
-        pstmt->setString(3, email);
-        pstmt->setString(4, password);
+            pstmt->setString(1, name);
+            pstmt->setString(2, telno);
+            pstmt->setString(3, email);
+            pstmt->setString(4, password);
 
-        pstmt->execute();
-        delete pstmt;
+            pstmt->execute();
+            delete pstmt;
 
-        //cout << "Registration successful! Your Customer_ID is: " <<  << endl;
+            cout << "Registration successful! Thank you for registering." << endl;
+        }
+        catch (sql::SQLException e) {
+            cout << "Error registering customer. Error message: " << e.what() << endl;
+        }
     }
-    catch (sql::SQLException e)
+    else
     {
-        cout << "Error registering customer. Error message: " << e.what() << endl;
+        cout << "Registration canceled. Returning to the Customer Options." << endl;
+        processCustomer(con);
     }
+    
 }
 
-// Customer.cpp
+
 
 void processCustomer(sql::Connection* con)
 {
+    system("cls");  // Clear the console screen
     int customerOption;
     int customerID = 0;  // Variable to store the logged-in customer's ID
-
+    bool exitToMainMenu = false;
     do
     {
-        cout << "\nCustomer Options:" << endl;
-        cout << "1. Login" << endl;
-        cout << "2. Register" << endl;
-        cout << "3. Exit to Main Menu" << endl;
-        cout << "Enter your choice (1, 2, or 3): ";
+        std::cout << "+-----------------------------+" << std::endl;
+        std::cout << "|       Customer Options      |" << std::endl;
+        std::cout << "|-----------------------------|" << std::endl;
+        std::cout << "| 1. Login                    |" << std::endl;
+        std::cout << "| 2. Register                 |" << std::endl;
+        std::cout << "| 3. Exit to Main Menu        |" << std::endl;
+        std::cout << "|-----------------------------|" << std::endl;
+        std::cout << "|      Enter your choice      |" << std::endl;
+        std::cout << "|        (1, 2, or 3)         |" << std::endl;
+        std::cout << "+-----------------------------+" << std::endl;
         cin >> customerOption;
 
         switch (customerOption)
         {
         case 1:
+            system("cls");  // Clear the console screen
+
             if (loginCustomer(con, customerID))
             {
+                system("cls");  // Clear the console screen
                 // Login successful, continue to customer menu
                 cout << "Login successful! Welcome, Customer " << customerID << "!" << endl;
                 // Call other functions or perform actions for the logged-in customer
             }
             break;
         case 2:
+            system("cls");  // Clear the console screen
+
             registerCustomer(con);
             break;
         case 3:
-            // Returning to the main menu
-            cout << "Returning to the Main Menu." << endl;
+            // Set the flag to true to indicate the desire to exit to Main Menu
+            exitToMainMenu = true;
             return;  // Use return to exit the function and go back to int main
             break;
         default:
+            system("cls");  // Clear the console screen
+
             cout << "Invalid choice. Please enter a number between 1 and 3." << endl;
             break;
         }
@@ -146,45 +192,39 @@ void processCustomer(sql::Connection* con)
 void enterCustomer(sql::Connection* con)
 {
     char customerChoice;  // Declare the variable outside the loop
-
+    system("cls");  // Clear the console screen
     do
     {
-        cout << "Customer Menu:" << endl;
-        cout << "1. Physical Game" << endl;
-        cout << "2. Device" << endl;
-        cout << "3. Exit to Main Menu" << endl;  // Removed the "Order" option
-        cout << "Enter your choice (1, 2, or 3): ";
+        std::cout << "+---------------------------+" << std::endl;
+        std::cout << "|        Customer Menu      |" << std::endl;
+        std::cout << "|---------------------------|" << std::endl;
+        std::cout << "| 1. Physical Game          |" << std::endl;
+        std::cout << "| 2. Device                 |" << std::endl;
+        std::cout << "| 3. Exit to Main Menu      |" << std::endl;
+        std::cout << "+---------------------------+" << std::endl;
         customerChoice = _getch() - '0';
 
         switch (customerChoice)
         {
         case 1:
+            system("cls");  // Clear the console screen
             showPhysicalGames(con);
             break;
         case 2:
+            system("cls");  // Clear the console screen
             showDevices(con);
             break;
         case 3:
-            cout << "Exiting to Main Menu." << endl;
-            return;
+            system("cls");  // Clear the console screen
+            cout << "\nExiting to Main Menu." << endl;
+            processCustomer(con);
             break;
         default:
-            cout << "Invalid choice. Please enter 1, 2, or 3." << endl;
+
+            cout << "\nInvalid choice. Please enter 1, 2, or 3." << endl;
             break;
         }
 
-        // Check if the user pressed 'x' to return to the Customer menu
-        char returnToMenu;
-        cout << "Press 'x' to return to the Main Menu: ";
-        cin >> returnToMenu;
-
-        if (returnToMenu != 'x')
-        {
-            cout << "Invalid input. Returning to the Customer menu." << endl;
-        }
-        else
-        {
-            cout << "Going back to Main Menu." << endl;
-        }
+       
     } while (customerChoice != 3);  // Repeat the loop until the user chooses to exit
 }

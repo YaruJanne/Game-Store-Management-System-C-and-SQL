@@ -1,0 +1,17 @@
+Purchase Receipt
+-----------------
+Purchase ID: 4
+Customer Email: jebat@gmail.com
+Device ID: 3
+Purchase Name: Kimjep
+Purchase Quantity: 1
+Purchase Price: 199
+Purchase Date: 2024-01-14
+
+Warranty Details
+-----------------
+Warranty ID: 4
+Purchase ID: 4
+Item Name: Dualshock 4
+Warranty Condition: VERIFIED
+Warranty Lasts Until: 2025-01-14

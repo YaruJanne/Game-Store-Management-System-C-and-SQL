@@ -1,0 +1,21 @@
+
+ Purchase Receipt:
++-----------------------------------------------+
+| Purchase ID       |: 13
+| Customer Email    |: yarujanne@gmail.com
+| Game ID           |: 3
+| Purchase Name     |: Syafiq
+| Purchase Quantity |: 1
+| Purchase Price    |: 199
+| Purchase Date     |: 2024-01-14
++-----------------------------------------------+
+
+ Warranty Details 
+
++-----------------------------------------------+
+Warranty ID           |: 13
+Purchase ID           |: 13
+Item Name             |: Ghost Of Tsushima
+Warranty Condition    |: VERIFIED
+Warranty Lasts Until  |: 2025-01-14
++-----------------------------------------------+

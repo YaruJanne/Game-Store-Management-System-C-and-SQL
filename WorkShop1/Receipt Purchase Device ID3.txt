@@ -1,0 +1,17 @@
+Purchase Receipt
+-----------------
+Purchase ID: 3
+Customer Email: Ipan@gmail.com
+Device ID: 4
+Purchase Name: Irfan Kusairee
+Purchase Quantity: 1
+Purchase Price: 1599
+Purchase Date: 2024-01-14
+
+Warranty Details
+-----------------
+Warranty ID: 3
+Purchase ID: 3
+Item Name: VR Headset
+Warranty Condition: VERIFIED
+Warranty Lasts Until: 2025-01-14

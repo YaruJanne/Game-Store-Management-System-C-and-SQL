@@ -1,0 +1,21 @@
+
+ Purchase Receipt:
++-----------------------------------------------+
+| Purchase ID       |: 13
+| Customer Email    |: sofi@gmail.com
+| DeviceID          |: 4
+| Purchase Name     |: Sofi
+| Purchase Quantity |: 1
+| Purchase Price    |: 1599
+| Purchase Date     |: 2024-01-14
++-----------------------------------------------+
+
+ Warranty Details 
+
++-----------------------------------------------+
+Warranty ID           |: 12
+Purchase ID           |: 13
+Item Name             |: VR Headset
+Warranty Condition    |: VERIFIED
+Warranty Lasts Until  |: 2025-01-14
++-----------------------------------------------+

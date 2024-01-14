@@ -21,13 +21,16 @@ void editPhysicalGame(sql::Connection* con)
         if (res->next())
         {
             // Display the current details
-            cout << "\nCurrent details:" << endl;
-            cout << "Games_List_ID: " << res->getInt("Games_List_ID") << endl;
-            cout << "Item_Name: " << res->getString("Item_Name") << endl;
-            cout << "Item_Quantity: " << res->getInt("Item_Quantity") << endl;
-            cout << "Item_Condition: " << res->getString("Item_Condition") << endl;
-            cout << "Item_Price: " << res->getDouble("Item_Price") << endl;
-            cout << "Item_Date: " << res->getString("Item_Date") << endl;
+            cout << "+--------------------------------------------+\n";
+            cout << "|                 Current Details            |\n";
+            cout << "+--------------------------------------------+\n";
+            cout << "| Games ID         | " << res->getInt("Games_List_ID") << endl;
+            cout << "| Item Name        | " << res->getString("Item_Name") << endl;
+            cout << "| Item Quantity    | " << res->getInt("Item_Quantity") << endl;
+            cout << "| Item Condition   | " << res->getString("Item_Condition") << endl;
+            cout << "| Item Price       | " << res->getDouble("Item_Price") << endl;
+            cout << "| Item Date        | " << res->getString("Item_Date") << endl;
+            cout << "+--------------------------------------------+\n";
 
             // Prompt for attribute to edit
             cout << "\nEnter attribute to edit (1. Name, 2. Quantity, 3. Condition, 4. Price, 5. Date): ";
@@ -109,13 +112,16 @@ void editDevice(sql::Connection* con)
         if (res->next())
         {
             // Display the current details
-            cout << "\nCurrent details:" << endl;
-            cout << "Devices_List_ID: " << res->getInt("Devices_List_ID") << endl;
-            cout << "Item_Name: " << res->getString("Item_Name") << endl;
-            cout << "Item_Quantity: " << res->getInt("Item_Quantity") << endl;
-            cout << "Item_Condition: " << res->getString("Item_Condition") << endl;
-            cout << "Item_Price: " << res->getDouble("Item_Price") << endl;
-            cout << "Item_Date: " << res->getString("Item_Date") << endl;
+            cout << "+--------------------------------------------+\n";
+            cout << "|                 Current Details            |\n";
+            cout << "+--------------------------------------------+\n";
+            cout << "| Devices ID       | " << res->getInt("Devices_List_ID") << endl;
+            cout << "| Item Name        | " << res->getString("Item_Name") << endl;
+            cout << "| Item Quantity    | " << res->getInt("Item_Quantity") << endl;
+            cout << "| Item Condition   | " << res->getString("Item_Condition") << endl;
+            cout << "| Item Price       | " << res->getDouble("Item_Price") << endl;
+            cout << "| Item Date        | " << res->getString("Item_Date") << endl;
+            cout << "+--------------------------------------------+\n";
 
             // Prompt for attribute to edit
             cout << "\nEnter attribute to edit (1. Name, 2. Quantity, 3. Condition, 4. Price, 5. Date): ";
@@ -178,10 +184,13 @@ void editDevice(sql::Connection* con)
 void editItem(sql::Connection* con)
 {
     char itemTypeChoice;
-    cout << "Choose the item type to edit:" << endl;
-    cout << "1. Physical Game" << endl;
-    cout << "2. Device" << endl;
-    cout << "Enter your choice (1 or 2): ";
+    std::cout << "+---------------------------+" << std::endl;
+    std::cout << "|         Edit Item         |" << std::endl;
+    std::cout << "|---------------------------|" << std::endl;
+    std::cout << "| 1. Physical Game          |" << std::endl;
+    std::cout << "| 2. Device                 |" << std::endl;
+    std::cout << "| 3. Exit to Main Menu      |" << std::endl;
+    std::cout << "+---------------------------+" << std::endl;
     itemTypeChoice = _getch() - '0';
 
     switch (itemTypeChoice)
@@ -203,10 +212,10 @@ void deletePhysicalGame(sql::Connection* con)
     cout << "\nDeleting a Physical Game:" << endl;
 
     // Display the current Physical Games
-    showPhysicalGames(con);
+    showStaffPhysicalGames(con);
 
     int gameslistID;
-    cout << "Enter List ID of the Physical Game to delete (enter -1 to cancel): ";
+    cout << "Enter List ID of the Physical Game to delete (enter x to cancel): ";
     cin >> gameslistID;
 
     if (cin.fail())
@@ -239,12 +248,17 @@ void deletePhysicalGame(sql::Connection* con)
         {
             // Physical Game found, confirm deletion
             cout << "\nAre you sure you want to delete the following Physical Game?" << endl;
-            cout << "Games_List_ID: " << res->getInt("Games_List_ID") << endl;
-            cout << "Item_Name: " << res->getString("Item_Name") << endl;
-            cout << "Item_Quantity: " << res->getInt("Item_Quantity") << endl;
-            cout << "Item_Condition: " << res->getString("Item_Condition") << endl;
-            cout << "Item_Price: " << res->getDouble("Item_Price") << endl;
-            cout << "Item_Date: " << res->getString("Item_Date") << endl;
+            cout << "+--------------------------------------------+\n";
+            cout << "|                 Current Details            |\n";
+            cout << "+--------------------------------------------+\n";
+            cout << "| Games ID         | " << res->getInt("Games_List_ID") << endl;
+            cout << "| Item Name        | " << res->getString("Item_Name") << endl;
+            cout << "| Item Quantity    | " << res->getInt("Item_Quantity") << endl;
+            cout << "| Item Condition   | " << res->getString("Item_Condition") << endl;
+            cout << "| Item Price       | " << res->getDouble("Item_Price") << endl;
+            cout << "| Item Date        | " << res->getString("Item_Date") << endl;
+            cout << "+--------------------------------------------+\n";
+
 
             char confirmDelete;
             cout << "Confirm deletion? (y/n): ";
@@ -284,7 +298,7 @@ void deleteDevice(sql::Connection* con)
     cout << "\nDeleting a Device:" << endl;
 
     // Display the current Devices
-    showDevices(con);
+    showStaffDevices(con);
 
     int deviceslistID;
     cout << "Enter List ID of the Device to delete (or 'x' to cancel): ";
@@ -319,12 +333,16 @@ void deleteDevice(sql::Connection* con)
         {
             // Device found, confirm deletion
             cout << "\nAre you sure you want to delete the following Device?" << endl;
-            cout << "Devices_List_ID : " << res->getInt("Devices_List_ID ") << endl;
-            cout << "Item_Name: " << res->getString("Item_Name") << endl;
-            cout << "Item_Quantity: " << res->getInt("Item_Quantity") << endl;
-            cout << "Item_Condition: " << res->getString("Item_Condition") << endl;
-            cout << "Item_Price: " << res->getDouble("Item_Price") << endl;
-            cout << "Item_Date: " << res->getString("Item_Date") << endl;
+            cout << "+--------------------------------------------+\n";
+            cout << "|                 Current Details            |\n";
+            cout << "+--------------------------------------------+\n";
+            cout << "| Devices ID       | " << res->getInt("Devices_List_ID") << endl;
+            cout << "| Item Name        | " << res->getString("Item_Name") << endl;
+            cout << "| Item Quantity    | " << res->getInt("Item_Quantity") << endl;
+            cout << "| Item Condition   | " << res->getString("Item_Condition") << endl;
+            cout << "| Item Price       | " << res->getDouble("Item_Price") << endl;
+            cout << "| Item Date        | " << res->getString("Item_Date") << endl;
+            cout << "+--------------------------------------------+\n";
 
             char confirmDelete;
             cout << "Confirm deletion? (y/n): ";

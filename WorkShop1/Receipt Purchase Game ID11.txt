@@ -1,0 +1,17 @@
+Purchase Receipt
+-----------------
+Purchase ID: 11
+Customer Email: jebat@gmail.com
+Game ID: 10
+Purchase Name: Kimjep
+Purchase Quantity: 1
+Purchase Price: 199
+Purchase Date: 2024-01-14
+
+Warranty Details
+-----------------
+Warranty ID: 11
+Purchase ID: 11
+Item Name: Kena : Bridges Of Spirit
+Warranty Condition: VERIFIED
+Warranty Lasts Until: 2025-01-14

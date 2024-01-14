@@ -1,0 +1,17 @@
+Purchase Receipt
+-----------------
+Purchase ID: 4
+Customer Email: jebat@gmail.com
+Game ID: 5
+Purchase Name: Kimejp
+Purchase Quantity: 1
+Purchase Price: 163
+Purchase Date: 2024-01-14
+
+Warranty Details
+-----------------
+Warranty ID: 4
+Purchase ID: 4
+Item Name: Monster Hunter Rise 
+Warranty Condition: VERIFIED
+Warranty Lasts Until: 2025-01-14
