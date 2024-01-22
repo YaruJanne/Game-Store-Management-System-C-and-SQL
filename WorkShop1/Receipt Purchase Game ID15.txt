@@ -1,0 +1,21 @@
+
+ Purchase Receipt:
++-----------------------------------------------+
+| Purchase ID       |: 15
+| Customer Email    |: ayep@gmail.com
+| Game ID           |: 12
+| Purchase Name     |: Syarif
+| Purchase Quantity |: 1
+| Purchase Price    |: 249
+| Purchase Date     |: 2024-01-14
++-----------------------------------------------+
+
+ Warranty Details 
+
++-----------------------------------------------+
+Warranty ID           |: 15
+Purchase ID           |: 15
+Item Name             |: God Of War : Ragnarok
+Warranty Condition    |: VERIFIED
+Warranty Lasts Until  |: 2025-01-14
++-----------------------------------------------+

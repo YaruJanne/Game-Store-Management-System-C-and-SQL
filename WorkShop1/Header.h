@@ -38,7 +38,7 @@ void editDevice(sql::Connection* con);
 void deletePhysicalGame(sql::Connection* con);
 void deleteDevice(sql::Connection* con);
 void displayAvailableItemsWithCondition(sql::Connection* con, const string& condition, bool includeCondition);
-void registerCustomer(sql::Connection* con);
+void RegisterCustomer(sql::Connection* con);
 bool loginCustomer(sql::Connection* con, int& customerId);
 void staffMain(sql::Connection* con);
 void staffMenu(sql::Connection* con);

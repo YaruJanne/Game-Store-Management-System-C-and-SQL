@@ -1,0 +1,21 @@
+
+ Purchase Receipt:
++-----------------------------------------------+
+| Purchase ID       |: 16
+| Customer Email    |: Yarujanne@gmail.com
+| Game ID           |: 2
+| Purchase Name     |: Syafiq
+| Purchase Quantity |: 1
+| Purchase Price    |: 89.99
+| Purchase Date     |: 2024-01-15
++-----------------------------------------------+
+
+ Warranty Details 
+
++-----------------------------------------------+
+Warranty ID           |: 16
+Purchase ID           |: 16
+Item Name             |: Battlefield 1
+Warranty Condition    |: VERIFIED
+Warranty Lasts Until  |: 2025-01-15
++-----------------------------------------------+

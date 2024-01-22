@@ -1,0 +1,21 @@
+
+ Purchase Receipt:
++-----------------------------------------------+
+| Purchase ID       |: 19
+| Customer Email    |: sofia@gmail.com
+| Game ID           |: 10
+| Purchase Name     |: sofia
+| Purchase Quantity |: 1
+| Purchase Price    |: 199
+| Purchase Date     |: 2024-01-15
++-----------------------------------------------+
+
+ Warranty Details 
+
++-----------------------------------------------+
+Warranty ID           |: 18
+Purchase ID           |: 19
+Item Name             |: Kena : Bridges Of Spirit
+Warranty Condition    |: VERIFIED
+Warranty Lasts Until  |: 2025-01-15
++-----------------------------------------------+

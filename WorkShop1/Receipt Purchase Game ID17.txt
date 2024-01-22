@@ -1,0 +1,21 @@
+
+ Purchase Receipt:
++-----------------------------------------------+
+| Purchase ID       |: 17
+| Customer Email    |: ayep@gmail.com
+| Game ID           |: 12
+| Purchase Name     |: ayep
+| Purchase Quantity |: 1
+| Purchase Price    |: 249
+| Purchase Date     |: 2024-01-15
++-----------------------------------------------+
+
+ Warranty Details 
+
++-----------------------------------------------+
+Warranty ID           |: 17
+Purchase ID           |: 17
+Item Name             |: God Of War : Ragnarok
+Warranty Condition    |: VERIFIED
+Warranty Lasts Until  |: 2025-01-15
++-----------------------------------------------+

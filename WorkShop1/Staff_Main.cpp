@@ -15,8 +15,8 @@ bool staffLogin()
     cout << "+---------------------------------------------+\n";
 
     // Fixed email and password for demonstration purposes
-    const string fixedEmail = "1";
-    const string fixedPassword = "2";
+    const string fixedEmail = "jebat002@gmail.com";
+    const string fixedPassword = "syai2211";
 
     if (enteredEmail == fixedEmail && enteredPassword == fixedPassword)
     {

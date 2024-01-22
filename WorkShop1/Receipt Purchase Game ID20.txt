@@ -1,0 +1,21 @@
+
+ Purchase Receipt:
++-----------------------------------------------+
+| Purchase ID       |: 20
+| Customer Email    |: wanikun2711@Gmail.com
+| Game ID           |: 8
+| Purchase Name     |: Syamil
+| Purchase Quantity |: 10
+| Purchase Price    |: 2100
+| Purchase Date     |: 2024-01-21
++-----------------------------------------------+
+
+ Warranty Details 
+
++-----------------------------------------------+
+Warranty ID           |: 19
+Purchase ID           |: 20
+Item Name             |: Legend Of Zelda : Wild Breath
+Warranty Condition    |: VERIFIED
+Warranty Lasts Until  |: 2025-01-21
++-----------------------------------------------+

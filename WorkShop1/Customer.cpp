@@ -75,7 +75,7 @@ bool loginCustomer(sql::Connection* con, int& customerId)
     }
 }
 
-void registerCustomer(sql::Connection* con)
+void RegisterCustomer(sql::Connection* con)
 {
     system("cls");  // Clear the console screen
     // Get user input for registration
@@ -172,7 +172,7 @@ void processCustomer(sql::Connection* con)
         case 2:
             system("cls");  // Clear the console screen
 
-            registerCustomer(con);
+            RegisterCustomer(con);
             break;
         case 3:
             // Set the flag to true to indicate the desire to exit to Main Menu

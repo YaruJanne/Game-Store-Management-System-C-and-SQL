@@ -1,0 +1,21 @@
+
+ Purchase Receipt:
++-----------------------------------------------+
+| Purchase ID       |: 21
+| Customer Email    |: whitesnow3005@gmail.com
+| Game ID           |: 7
+| Purchase Name     |: Soleha
+| Purchase Quantity |: 2
+| Purchase Price    |: 518
+| Purchase Date     |: 2024-01-22
++-----------------------------------------------+
+
+ Warranty Details 
+
++-----------------------------------------------+
+Warranty ID           |: 20
+Purchase ID           |: 21
+Item Name             |: Hogwarts Legacy
+Warranty Condition    |: VERIFIED
+Warranty Lasts Until  |: 2025-01-22
++-----------------------------------------------+
